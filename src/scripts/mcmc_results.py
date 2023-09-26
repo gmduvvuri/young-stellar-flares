@@ -16,7 +16,7 @@ from paths import (
 
 set_rcparams()
 
-teff_cbar = teff_colorbar()
+teff_cbar = teff_colorbar().reversed()
 
 temp_ranges = np.array([[2300, 3400], [3400, 3850],
                         [3850, 4440], [4440, 5270], [5270, 5930]])

@@ -53,6 +53,8 @@ This paper is presented as follows.
 
 \subsection{Sample Selection}
 
+
+
 We aim to measure the evolution in flare rates as a function of stellar age for
 stars with $1 \leq t_\textrm{age} \leq 250$\,Myr. We used the MOCA Data Base
 (Gagné et al. in prep.) to identify nearby young moving groups, associations,
@@ -162,7 +164,6 @@ flare events. It then calculates the probability of the entire flare event as
 the average of the probabilities assigned to all the data points during the flare.
 
 
-
 \begin{figure}[ht!]
     \script{flare_distribution.py}
     \begin{centering}
@@ -209,13 +210,73 @@ from 3,983 stars (Figure~\ref{fig:flare_distribution}). 83.6\% of the flares hav
 probabilities of $P \geq 90\%$ of being true; 64.9\% of the flares have probabilities
 of $P \geq 99\%$ of being true.
 
-\section{Results}\label{sec:res}
+
+\subsection{Measuring Rotation Periods}
+
+\cite{seligman22} demonstrated that stars with low Rossby numbers $R_0 < 0.13$ have
+shallower flare frequency distribution slopes, indicative of more high energy flares
+originating from these sources. In addition to understanding flare statistics across
+young ages, we aim to expand this sample by measuring the rotation periods, $P_\textrm{rot}$,
+for the stars in our sample. To do this, we used \texttt{michael}\footnote{\url{https://github.com/ojhall94/michael}},
+an open-source Python package that robustly measures $P_\textrm{rot}$ using a combination
+traditional Lomb-Scargle periodograms and wavelet transformations (Hall et al. submitted).
+\texttt{michael} measures $P_\textrm{rot}$ using the \texttt{eleanor} package, which
+extracts light curves from the TESS Full-Frame Images \citep[FFIs;][]{feinstein19}.
+We ran \texttt{michael} on all stars from which flares were identified. The estimated
+$P_\textrm{rot}$ were vetted by-eye, from the \texttt{michael} diagnostic plots. In
+total, we robustly measured \textcolor{red}{n} $P_\textrm{rot}$ across our sample of
+3,983 stars.
+
+
+\section{Results}\label{sec:results}
+
+We analyze our new flare sample from three perspectives. First, we perform the standard
+FFD fitting of a power-law to the distribution of flare energies. Second, we fit the FFD with the
+prescription in \cite{gershberg72}, which fits for both the FFD slope and y-intercept.
+Third, we fit a truncated power-las to the distribution of flare amplitudes, to determine
+if there is a correlation between $R_0$ and flare distributions.
+
+The number of stars, and consequently flares, per each association varied greatly,
+due to the limited number of stars observed at TESS 2-minute cadence. Therefore, instead
+of measuring FFD properties as a function of association, we opted to group stars
+by effective temperature, $T_\textrm{eff}$, and average adopted association age. We
+grouped stars in the following $T_\textrm{eff}$ space: M-stars below the fully
+convective boundary ($T_\textrm{eff} = 2300 - 3400$\,K), early type M-stars
+($T_\textrm{eff} = 3400 - 3850$\,K), late K-stars ($T_\textrm{eff} = 3850 - 4440$\,K),
+early K-stars ($T_\textrm{eff} = 4440 - 5270$\,K), and G-stars ($T_\textrm{eff} = 5270 - 5930$\,K).
+We did not include any stars hotter than $T_\textrm{eff} > 5930$\,K, as these stars
+are dominated by noise in the TESS observations. Additionally, we grouped stars
+in the following age space: $4-10$\,Myr, $10-20$\,Myr, $20-40$\,Myr, $40-50$\,Myr,
+$70-80$\,Myr, $120-150$\,Myr, and $150-300$\,Myr. We note that there is a gap in
+age from $50-70$\,Myr, which could be expanded with the identification of more
+associations in this age range. However, for the purposes of this work, we do not
+include additional sources which may fall in this age range.
+
+
+\subsection{Standard Power-Law Fits}\label{subsec:stats}
+
+From the $T_\textrm{eff}$ and age bins described above, we binned the flares in each
+subgroup and fit their FFD slopes, approximated as a power-law. Flares were binned
+into 25 bins in log-space from $10^{27} - 10^{35}$\,erg. We fit the FFDs from the
+energy bin with the maximum flare rate and energies higher than that. We opt to do
+this as bins of lower energies may be incomplete, and the turnover in the FFD cannot
+be accurately modeled as a power-law.
+
+We fit the FFD using the MCMC method implemented in \texttt{emcee} \citep{goodman10, emcee}
+and fit for the slope, $\alpha$, y-intercept, $b$, and an additional noise term, $f$, which
+accounts for an underestimation of the errors on each bin. We initialized the MCMC fit with
+300 walkers and ran our fit over 5000 steps. Upon visual inspection, we discarded the
+first 100 steps; onwards the steps were fully burned-in. The full FFDs are presented
+in Figure~\ref{fig:simple_ffd_all}, along with 100 samples from the MCMC fit. The measured
+FFD slopes, $\alpha$ are presented in Figure~\ref{fig:mcmc_results}. We approximate the
+error on the slope as the lower 16\textsuperscript{th} and upper 84\textsuperscript{th}
+percentiles from the MCMC fit.
 
 
 \begin{figure*}[ht!]
     \script{mcmc_results.py}
     \begin{centering}
-        \includegraphics[width=2\textwidth]{figures/mcmc_results.pdf}
+        \includegraphics[width=3\textwidth]{figures/mcmc_results.pdf}
         \caption{
             Measured flare-frequency distribution slopes, $\alpha$, as a function
             of stellar effective temperature, $T_\textrm{eff}$ and age.
@@ -224,16 +285,85 @@ of $P \geq 99\%$ of being true.
     \end{centering}
 \end{figure*}
 
-\subsection{Flare Rates by Association}
+
+\subsection{Fitting for $\alpha$ and $\beta$}
 
 
-\subsection{Flare Rates by Age}
+\subsection{Truncated Power-Law Fits}
 
+We follow the prescription presented in \cite{seligman22}. Namely, we fit a truncated
+power-law distribution of the form
 
-\subsection{Flare Rates by Effective Temperature}
+\begin{equation}
+  dp/dA \propto A^{-\alpha_T} e^{-A/A_*}
+\end{equation}
+
+where $A$ is the amplitude of the flare, $A_*$ is a flare amplitude cutoff parameter
+and $\alpha_T$ is the slope, rather than
+$\alpha$. We fit the slopes using the MCMC method implemented in \texttt{emcee}
+\citep{goodman10, emcee}, using the log-likelihood function in \cite{seligman22}.
+We fit for $A_*$ and $\alpha_T$. We initialized the MCMC fit with textcolor{red}{n}
+walkers and evaluated the fit over textcolor{red}{n} steps. The first textcolor{red}{n}
+steps were discarded upon visual inspection. The results are presented in Figure~\ref{fig:trunc}.
+
+\section{Discussion}\label{sec:discuss}
+
+\subsection{Applications to ULLYSES}
+
+Measuring Far-Ultraviolet (FUV) total flux output and flare rates are
+essential for understanding the contributions of flares to exoplanet atmospheric
+mass-loss and disequilibrium chemistry. An equivalent, but significantly smaller sample
+to the stars studied here are the those observed as part of the \textit{Hubble Space Telescope}
+(HST) Ultraviolet Legacy Library of Young Stars as Essential Standards (ULLYSES)
+program. This survey observed 71 K- to M-type T Tauri stars in nine young
+galactic associations.
+
+We can extend the results presented here to estimate how many flares may be present
+in these important FUV observations.
+
+Additionally, we analyzed the TESS light curves for all of the ULLYSES targets, when
+available at 2-minute cadence. We identified a total of \textcolor{red}{n} flares.
+This is inconsistent with the overall flare statistics identified in this work, and is
+overall unexpected for young stars which are known to be more magnetically active
+\citep{ilin20, feinstein20b}. This could suggest that there is some bias in the way
+the ULLYSES sample was constructed, and that it is unexpected to find any flares in the
+FUV data. Alternatively, it could be that the ongoing accretion luminosity results
+in a brighter host star, such that the flares we normally would see are drowned
+out by the increased baseline luminosity. We do not include this flare in our
+overall statistical analysis of TESS flare rates for young stars.
 
 
 \section{Conclusions}\label{sec:conclusions}
+
+
+This work made use of the open-source package, \textcolor{red}{\textit{showyourwork!}}
+\citep{luger2021}, which promotes reproducible publications.
+
+\appendix
+\restartappendixnumbering
+
+\section{Supplemental Material}\label{appendix:supp_ffds}
+
+Miscellaneous figures and such that people might want but I don't need to show
+
+\begin{figure*}[ht!]
+    \script{simple_ffd_all.py}
+    \begin{centering}
+        \includegraphics[width=\textwidth]{figures/simple_ffd_all.pdf}
+        \caption{
+            Flare frequency distributions (FFDs) for subgroups of stars, clustered
+            by age and effective temperature, $T_\textrm{eff}$. Flares were binned
+            into 25 bins in log-space from $10^{27} - 10^{35}$\,erg. We fit the FFD
+            from the turn-over in the binned flares, likely a result of very low-energy
+            flares being missed in our flare-detection algorithm. The bins used to fit
+            the FFD are shown in black, while all bins are shown in gray. We ran an MCMC
+            fit to these distributions with a simple power law; 100 random samples from these
+            fits are over-plotted in orange. We fit distributions with $> 3$ bins.
+            The best-fit slopes from these fits are presented in Figure~\ref{fig:mcmc_results}.
+        }
+        \label{fig:simple_ffd_all}
+    \end{centering}
+\end{figure*}
 
 
 \bibliography{bib}
