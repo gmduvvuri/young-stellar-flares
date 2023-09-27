@@ -285,6 +285,16 @@ percentiles from the MCMC fit.
     \end{centering}
 \end{figure*}
 
+There is a $3\sigma$ discrepancy between the FFD slope measured in \cite{ilin21}
+and the work presented here at ages $\sim 120$\,Myr. This discrepancy could be the
+result of several factors. First, \cite{ilin21} used the \textit{K2} 30-minute
+light curves. This would result in a sample biased towards the highest-energy flares which
+could be sampled at this cadence. Our flare detection method is less-biased towards
+the low-energy flares due to the 2-minute cadence from TESS and our flare detection
+algorithm. Second, our sample has $\sim 2\times$ the number
+of stars and $\sim 7\times$ the number of flares than their sample. This could
+result in a more complete FFD compared to previous work.
+
 
 \subsection{Fitting for $\alpha$ and $\beta$}
 
@@ -335,9 +345,31 @@ overall statistical analysis of TESS flare rates for young stars.
 
 \section{Conclusions}\label{sec:conclusions}
 
+In this work, we present the first measured flare rates for stars $< 300$\,Myr using
+TESS 2-minute cadence observations. We identified originating 28,822 flares from
+3,983 stars. The results of our work are summarized as follows:
 
-This work made use of the open-source package, \textcolor{red}{\textit{showyourwork!}}
-\citep{luger2021}, which promotes reproducible publications.
+\begin{enumerate}
+  \item We measured the flare-frequency distribution (FFD) slope, $\alpha$, for samples
+  of flares binned by age and $T_\textrm{eff}$. We find $\alpha$ saturates at
+  $\alpha = -0.5$ for stars younger than 300\,Myr and declines after that age.
+  This is the first evidence that, like other tracers of stellar magnetic activity,
+  flare rates saturate across spectral types.
+  \item We measured the y-intercept, $\beta$, for the same bins of flares. We find
+  that ...
+  \item We measured the rotation periods, $P_\textrm{rot}$ for \textcolor{red}{n}
+  stars in our sample using the open-source Python package \texttt{michael}.
+  \item We measured the slope of a truncated power-law, $\alpha_T$, for the same
+  bins of flares. Additionally, we measured $\alpha_T$ as a function of Rossby
+  number, $R_0$.
+\end{enumerate}
+
+\vspace{3mm}
+
+We thank Darryl Seligman and David Wilson for thoughtful insights and useful
+conversations. This work made use of the open-source package,
+\textcolor{red}{\textit{showyourwork!}} \citep{luger2021}, which promotes
+reproducible publications. ADF acknowledges funding from ...
 
 \appendix
 \restartappendixnumbering
