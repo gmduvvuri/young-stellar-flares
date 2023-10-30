@@ -83,9 +83,14 @@ for i in range(len(ages)):
 #######################
 norm = matplotlib.colors.Normalize(vmin=2300,vmax=5930)
 
-fig, (ax1, ax2) = plt.subplots(nrows=2, figsize=(8,6),
+fig, axes = plt.subplots(nrows=2, figsize=(10,6),
                                gridspec_kw={'height_ratios':[1,2]})
+ax1, ax2 = axes.reshape(-1)
+
 fig.set_facecolor('w')
+
+# For the color bar only
+sc = ax1.scatter(np.arange(len(yp)), yp, c=teff, cmap=cmap, vmin=2300, vmax=5930, s=0)
 
 for i in range(len(teff)):
     rgba_color = cmap.reversed()(norm(teff[i]))
@@ -99,7 +104,7 @@ for i in range(len(teff)):
     ax2.vlines(i, std_rate[:,0][i], std_rate[:,1][i], lw=10, alpha=0.5,
                color=hexnum)
     ax.plot(i, yp[i], 'o', color=hexnum, markeredgecolor='k', lw=2,
-             ms=8)
+             ms=10)
 
 ax1.spines['bottom'].set_visible(False)
 ax2.spines['top'].set_visible(False)
@@ -119,6 +124,7 @@ ax2.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
 
 ax2.set_ylim(-0.01,0.4)
 plt.ylabel('Flare Rate [day$^{-1}$]', y=0.8)
+plt.xlabel('Host Star Name')
 plt.xticks(np.arange(len(yp)),
            labels=names, rotation='vertical', fontsize=14)
 
@@ -130,6 +136,9 @@ ax1.set_yticks(np.arange(2.2,2.3,0.05))
 ax1.set_ylim(2.15,2.25)
 
 plt.subplots_adjust(hspace=0.1)
+
+cbar = fig.colorbar(sc, ax=axes.ravel().tolist())
+cbar.set_label('T$_{eff}$ [K]')
 
 plt.savefig(os.path.join(figures_dir,'yp_rates.pdf'),
             dpi=300, bbox_inches='tight')
