@@ -18,6 +18,7 @@ set_rcparams()
 tab = Table.read(os.path.join(data_dir,
                               'llamaradas-estelares_all_parameters_withcuts_final_v2.csv'),
                  format='csv')
+tab = tab[(tab['noise_cut1']==0) & (tab['noise_cut2']==0) & (tab['ed'] > 0) & (tab['age']>0)]
 
 sample = Table.read(os.path.join(data_dir,'moca_sample.csv'), format='csv')
 

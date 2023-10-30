@@ -6,7 +6,7 @@
 \begin{document}
 
 % Title
-\title{Refined Flare Rates for Stars Younger than 250\,Myr}
+\title{Evidence of Magnetic Saturation from Stellar Flare Rates}
 
 % Author list
 \author{Adina~D.~ Feinstein}
@@ -143,7 +143,7 @@ We followed the machine learning flare-identification methods presented in
 \cite{feinstein20a}. This method relies on the fact that all flare events
 have similar time-dependent morphologies generally described as a sharp rise
 and an exponential decay. This method uses a convolutional neural network (CNN),
-\texttt{stella} \citep{feinstein20b}, trained on by-eye validated flare events from
+\texttt{stella} \citep{feinstein20}, trained on by-eye validated flare events from
 TESS Sectors 1 and 2 to identify flare events in TESS 2-minute data
 \citep{guenther19_flares, feinstein20a}. The benefits of the CNN is that it is
 insensitive to the stellar baseline, since it is trained to look only for the
@@ -182,7 +182,8 @@ the average of the probabilities assigned to all the data points during the flar
     \end{centering}
 \end{figure}
 
-\subsection{Modeling Flare Properties}
+
+\subsubsection{Modeling Flare Properties}
 
 We used the analytical flare model in
 \cite{tovar22}\footnote{\url{https://github.com/lupitatovar/Llamaradas-Estelares}}
@@ -197,19 +198,36 @@ in the sample. We combine the model with a second-order polynomial fit to
 a 10-hour baseline before and after the flare to account for any rotational
 modulation.
 
-From these fits, we performed a series of quality checks to ensure the flares
-in our sample are real. First, we removed any flares with best-fit FWHM $ < 0$
-and $A < 0$. Second, we removed any flares with a large error on the amplitude,
-$\sigma_A > 10$ and flares where $\sigma_A > A$. Third, we removed flares where
-$A < 2 \times \textrm{RMS}$, where the RMS is calculated from the 10~hour baseline
-around the best-fit $t_\textrm{peak}$. These cuts are indicative of a poorly fit
-flare model due to the flare being overwhelmed by noise in the surrounding baseline
-light curve. We choose to include flares with a probability $P \geq 75\%$ of being
-a true flare. After these checks, we have a flare sample of 29,128~flares originating
-from 3,983 stars (Figure~\ref{fig:flare_distribution}). 83.6\% of the flares have
-probabilities of $P \geq 90\%$ of being true; 64.9\% of the flares have probabilities
-of $P \geq 99\%$ of being true.
 
+\subsubsection{Flare Quality Checks}
+
+The \texttt{stella} CNNs were initially trained on data from TESS Sectors 1 and 2.
+Because the noise properties from sector to sector varies, the CNNs are unable to accurately
+capture all of these changes. Additionally, the CNNs were trained on a sample of \textcolor{red}{n}
+stars, which does not necessarily encapsulate all types of variable stars or a sufficient distribution
+of variable stars (e.g., eclipsing binaries and RR Lyraes). As such, we apply the additional
+quality checks presented in \cite{Feinstein22} to ensure our flare sample has little to no contamination
+from other sources. We remove flares which satisfy the one or more of the following criteria:
+
+\begin{enumerate}
+  \item The amplitude of the flare must be $> 0.01$, or 1\%. This follows the limits set by
+        \cite{feinstein20}.
+  \item The amplitude of the flare (A) must be greater than $1.5\times$CDPP \citep[Combined Differential
+        Photometric Precision;][]{christiansen12}, similar to \cite{Feinstein22}.
+  \item For flares originating from stars with $T_\textrm{eff} > 5000$, the amplitude of the flare
+        must be greater than $12\times$CDPP. This is because the most massive stars tended to have
+        much larger scatter in the TESS noise.
+  \item The fitted equivalent duration (ED) must be positive $\textrm{ED} > 0$.
+  \item The fitted full-width half-maximum (FHWM) and A must be $> 0$.
+  \item The error on the A must be $\sigma_A < A$. This removed poorly constrained flares and often
+        flares which were buried in the TESS noise.
+\end{enumerate}
+
+We choose to include flares with a probability $P \geq 75\%$ of being
+a true flare. After these checks, we have a flare sample of 28,822~flares originating
+from 3,979 stars (Figure~\ref{fig:flare_distribution}). 83.8\% of the flares have
+probabilities of $P \geq 90\%$ of being true; 65.0\% of the flares have probabilities
+of $P \geq 99\%$ of being true.
 
 \subsection{Measuring Rotation Periods}
 
@@ -318,6 +336,71 @@ steps were discarded upon visual inspection. The results are presented in Figure
 
 \section{Discussion}\label{sec:discuss}
 
+\subsection{Correlation to Other Metrics of Magnetic Saturation}
+
+
+\subsection{Comparison to Young Planet Host Stars}
+
+The all-sky observing strategy of TESS has revealed a new population of young transiting exoplanets.
+Characterizing the local environment for these planets is crucial to understanding their subsequent evolution
+to forming the mature population of planets. It is debated whether stellar flares are beneficial or detrimental
+to exoplanets. On one hand, \textcolor{red}{creates life}. On the other hand, stellar flares and affiliated
+coronal mass ejections can permanently alter atmospheric compositions \citep{chen21} and increase the amount of
+atmospheric mass stripped during the early stages of planet evolution \citep{feinstein20}. To understand the
+evolution of these new insightful young transiting exoplanets, we compare their measured flare rates to a more
+statistical sample of stars with similar ages and $T_\textrm{eff}$.
+
+We measured the flare rates of planet hosting stars $< 300$\,Myr, comparable to the ages of our primary sample.
+We followed the methods outlined in Section~\ref{sec:methods} to detect and vet flares. For each star, we created
+an equivalent sample with respect to both age and $T_\textrm{eff}$ to compare the flare rates too. We considered
+stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculated the overall
+flare rate as Equation~\ref{eq:fr}. We report the flare rates of host star and the comparable sample in Table~\ref{tab:yprates}.
+For the comparable sample, we report the median flare rate, and the lower 16\textsuperscript{th} and upper 84\textsuperscript{th}
+percentiles.
+
+\begin{figure}[ht!]
+    \script{yp_rates.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/yp_rates.pdf}
+        \caption{
+            Comparison of flare rates from young planet host stars with respect to
+            a comparable sample with respect to age [Myr] and $T_\textrm{eff}$ [K].
+        }
+        \label{fig:yp_rates}
+    \end{centering}
+\end{figure}
+
+
+\begin{deluxetable}{l r r r}[!ht]
+\tabletypesize{\footnotesize}
+\tablecaption{Young Planet Host Flare Rates\label{tab:yprates}}
+\tablehead{
+\colhead{Host Name} & \colhead{Age} & \colhead{Flare Rate} & \colhead{Comp. Sample} \\
+ & \colhead{[Myr]} & \colhead{[day$^{-1}$]} & \colhead{Flare Rate [day$^{-1}$]}
+}
+\startdata
+TOI 1227 &  $11 \pm 2$ &  0.008  & $0.119_{-0.046}^{+0.148}$ \\
+HIP 67522 & $17 \pm 2$ &  0.169  & $0.046_{-0.020}^{+0.069}$ \\
+AU Mic & $22 \pm 3$ &  2.218  & $0.133_{-0.046}^{+0.171}$ \\
+V1298 Tau & $23 \pm 4$ &  0.022  & $0.074_{-0.033}^{+0.091}$ \\
+HD 109833 & $27 \pm 3$ & 0.000  & $0.046_{-0.020}^{+0.070}$ \\
+KOI-7913 & $36 \pm 10$ &  0.031  & $0.134_{-0.045}^{+0.162}$ \\
+KOI-7368 & $36 \pm 10$ &  0.029  & $0.064_{-0.030}^{+0.087}$ \\
+DS Tuc & $45 \pm 4$ &  0.420  & $0.056_{-0.024}^{+0.078}$ \\
+TOI 942 & $50_{-20}^{+30} $ &  0.040  & $0.086_{-0.038}^{+0.117}$ \\
+TOI 451 & $120 \pm 10$ &  0.128  & $0.071_{-0.029}^{+0.085}$ \\
+HIP 94235 & $133_{-20}^{+15}$ &  0.020  & $0.051_{-0.017}^{+0.079}$ \\
+TOI 1860 & $133 \pm 26$ &  0.008  & $0.067_{-0.025}^{+0.086}$ \\
+TOI 1807 & $180 ± 40$ &  0.013  & $0.060_{-0.022}^{+0.085}$ \\
+HD 18599 & $200_{-70}^{+200} $ & 0.000 & $0.025_{-0.015}^{+0.044}$ \\
+TOI 2076 & $204 \pm 50$ & 0.000 & $0.092_{-0.045}^{+0.091}$ \\
+HD 110082 & $250_{-70}^{+50} $ & 0.000 & $0.047_{-0.020}^{+0.067}$ \\
+\enddata
+\end{deluxetable}
+
+
+
+
 \subsection{Applications to ULLYSES}
 
 Measuring Far-Ultraviolet (FUV) total flux output and flare rates are
@@ -335,7 +418,7 @@ Additionally, we analyzed the TESS light curves for all of the ULLYSES targets, 
 available at 2-minute cadence. We identified a total of \textcolor{red}{n} flares.
 This is inconsistent with the overall flare statistics identified in this work, and is
 overall unexpected for young stars which are known to be more magnetically active
-\citep{ilin20, feinstein20b}. This could suggest that there is some bias in the way
+\citep{ilin20, feinstein20}. This could suggest that there is some bias in the way
 the ULLYSES sample was constructed, and that it is unexpected to find any flares in the
 FUV data. Alternatively, it could be that the ongoing accretion luminosity results
 in a brighter host star, such that the flares we normally would see are drowned
@@ -401,3 +484,4 @@ Miscellaneous figures and such that people might want but I don't need to show
 \bibliography{bib}
 
 \end{document}
+feinstein20
