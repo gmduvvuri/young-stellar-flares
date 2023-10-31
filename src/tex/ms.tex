@@ -1,12 +1,13 @@
 % Define document class
 \documentclass[twocolumn]{aastex631}
 \usepackage{showyourwork}
+\usepackage{rsfso}
 
 % Begin!
 \begin{document}
 
 % Title
-\title{Evidence of Magnetic Saturation from Stellar Flare Rates}
+\title{Flare Rates and Rotation Periods of 5700 Stars Younger than 300 Myr}
 
 % Author list
 \author{Adina~D.~ Feinstein}
@@ -26,7 +27,10 @@ Boulder, UCB 600, Boulder, CO 80309}
     nearby young moving groups, or clusters. We identified $\sim 29,000$ flares
     using the \texttt{stella} machine-learning algorithm. We measured the flare-
     frequency distribution slopes as a function of age and stellar effective
-    temperature.
+    temperature. Finally, we measure the flare rates of young planet-hosting stars and
+    compare flare rates to a larger sample of stars with similar ages and $T_\textrm{eff}$.
+    We find that the majority of planet-hosting stars have lower flare rates, with the exception of
+    HIP 67522, AU Mic, DS Tuc, and TOI 451.
 \end{abstract}
 
 % Main body with filler text
@@ -229,7 +233,7 @@ from 3,979 stars (Figure~\ref{fig:flare_distribution}). 83.8\% of the flares hav
 probabilities of $P \geq 90\%$ of being true; 65.0\% of the flares have probabilities
 of $P \geq 99\%$ of being true.
 
-\subsection{Measuring Rotation Periods}
+\subsection{Measuring Rotation Periods}\label{subsec:prot}
 
 \cite{seligman22} demonstrated that stars with low Rossby numbers $R_0 < 0.13$ have
 shallower flare frequency distribution slopes, indicative of more high energy flares
@@ -242,8 +246,8 @@ traditional Lomb-Scargle periodograms and wavelet transformations (Hall et al. s
 extracts light curves from the TESS Full-Frame Images \citep[FFIs;][]{feinstein19}.
 We ran \texttt{michael} on all stars from which flares were identified. The estimated
 $P_\textrm{rot}$ were vetted by-eye, from the \texttt{michael} diagnostic plots. In
-total, we robustly measured \textcolor{red}{n} $P_\textrm{rot}$ across our sample of
-3,983 stars.
+total, we robustly measured 1,269 $P_\textrm{rot}$ across our sample of
+3,983 stars, which is $\sim 50\%$.
 
 
 \section{Results}\label{sec:results}
@@ -294,7 +298,7 @@ percentiles from the MCMC fit.
 \begin{figure*}[ht!]
     \script{mcmc_results.py}
     \begin{centering}
-        \includegraphics[width=3\textwidth]{figures/mcmc_results.pdf}
+        \includegraphics[width=3\textwidth, trim={0 0 30mm 0}, clip]{figures/mcmc_results.pdf}
         \caption{
             Measured flare-frequency distribution slopes, $\alpha$, as a function
             of stellar effective temperature, $T_\textrm{eff}$ and age.
@@ -334,9 +338,20 @@ We fit for $A_*$ and $\alpha_T$. We initialized the MCMC fit with textcolor{red}
 walkers and evaluated the fit over textcolor{red}{n} steps. The first textcolor{red}{n}
 steps were discarded upon visual inspection. The results are presented in Figure~\ref{fig:trunc}.
 
-\section{Discussion}\label{sec:discuss}
+\section{Flare Rates Compared to P$_{rot}$}
 
-\subsection{Correlation to Other Metrics of Magnetic Saturation}
+\begin{figure}[ht!]
+    \script{prot_histograms.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/prot_histograms.pdf}
+        \caption{
+            Rotation periods and flare rates for M, K, and G stars (top to bottom).
+        }
+        \label{fig:prot_histograms}
+    \end{centering}
+\end{figure}
+
+\section{Discussion}\label{sec:discuss}
 
 
 \subsection{Comparison to Young Planet Host Stars}
@@ -353,10 +368,18 @@ statistical sample of stars with similar ages and $T_\textrm{eff}$.
 We measured the flare rates of planet hosting stars $< 300$\,Myr, comparable to the ages of our primary sample.
 We followed the methods outlined in Section~\ref{sec:methods} to detect and vet flares. For each star, we created
 an equivalent sample with respect to both age and $T_\textrm{eff}$ to compare the flare rates too. We considered
-stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculated the overall
-flare rate as Equation~\ref{eq:fr}. We report the flare rates of host star and the comparable sample in Table~\ref{tab:yprates}.
-For the comparable sample, we report the median flare rate, and the lower 16\textsuperscript{th} and upper 84\textsuperscript{th}
-percentiles.
+stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculate the overall
+flare rate as described in \cite{Feinstein22}:
+
+\begin{equation}
+  \mathcal{R} = \frac{1}{\tau_\textrm{obs}} \left( \sum_{i=1}^{N} p_i \right)
+\end{equation}
+
+where $\mathcal{R}$ is the flare rate in day$^{-1}$, $\tau_\textrm{obs}$ is the total amount of time a target was
+observed with TESS, and $p_i$ is the probability that flare $i$ is a true flare as assigned by \texttt{stella}. We present
+the flare rates of planet-hosting stars and a comparable sample of stars in Figure~\ref{fig:yp_rates} and report the measured
+rates in Table~\ref{tab:yp_rates}. For the comparable sample, we report the median flare rate, and the lower 16\textsuperscript{th}
+and upper 84\textsuperscript{th} percentiles.
 
 \begin{figure}[ht!]
     \script{yp_rates.py}
@@ -407,7 +430,17 @@ HD 110082 & $250_{-70}^{+50} $ & 0.000 & $0.047_{-0.020}^{+0.067}$ \\
 \enddata
 \end{deluxetable}
 
+\subsection{Correlation to Other Metrics of Magnetic Saturation}
 
+X-ray luminosity surveys of stars have revealed a saturation limit with respect to
+the star's rotation period. Namely, there is no evolution in $L_X/L_\textrm{bol}$ for
+stars with $P_\textrm{rot} < 10$\,days \citep{Pizzolato03}.
+
+Here, we explore if flare rates evolve as a function of rotation period. We used our
+measured $P_\textrm{rot}$ as described in Section~\ref{subsec:prot}. Due to TESS's orbit,
+we limit our search of $P_\textrm{rot}$ to $< 20$\,days. This should not bias our analysis as
+young stars are known to rotate on short timescales \citep[e.g.][]{west15, popinchalk23}. We
+present our results in Figure~\ref{fig:prot}.
 
 
 \subsection{Applications to ULLYSES}
