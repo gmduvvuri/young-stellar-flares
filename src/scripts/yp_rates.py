@@ -104,7 +104,7 @@ for i in range(len(teff)):
     ax2.vlines(i, std_rate[:,0][i], std_rate[:,1][i], lw=10, alpha=0.5,
                color=hexnum)
     ax.plot(i, yp[i], 'o', color=hexnum, markeredgecolor='k', lw=2,
-             ms=10)
+             ms=12)
 
 ax1.spines['bottom'].set_visible(False)
 ax2.spines['top'].set_visible(False)
@@ -122,7 +122,7 @@ kwargs.update(transform=ax2.transAxes)  # switch to the bottom axes
 ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
 ax2.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
 
-ax2.set_ylim(-0.01,0.4)
+ax2.set_ylim(-0.05,0.4)
 plt.ylabel('Flare Rate [day$^{-1}$]', y=0.8)
 plt.xlabel('Host Star Name')
 plt.xticks(np.arange(len(yp)),

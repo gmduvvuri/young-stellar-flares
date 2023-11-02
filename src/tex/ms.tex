@@ -338,18 +338,72 @@ We fit for $A_*$ and $\alpha_T$. We initialized the MCMC fit with textcolor{red}
 walkers and evaluated the fit over textcolor{red}{n} steps. The first textcolor{red}{n}
 steps were discarded upon visual inspection. The results are presented in Figure~\ref{fig:trunc}.
 
-\section{Flare Rates Compared to P$_{rot}$}
+\section{Flare Rates Compared to $R_0$}
 
-\begin{figure}[ht!]
+The Rossby number, $R_0$, is a term which marginalizes over several properties which are known to
+affect the stellar dynamo, such as the rotation period and stellar mass. We convert our measured
+rotation periods to $R_0$, which is defined as $R_0 = P_\textrm{rot}/\tau$, where $\tau$ is the
+convective turnover time. We approximate $\tau$ following the prescription in \cite{wright11}. We
+equate the flare rates for individual stars as
+
+\begin{equation}\label{eqn:fr}
+  \mathcal{R} = \frac{1}{t_\textrm{obs}} \left( \sum_{i=1}^{N} p_i \right)
+\end{equation}
+
+where $\mathcal{R}$ is the flare rate in units of day$^{-1}$, $t_\textrm{obs}$ is the total amount of time a target was
+observed with TESS, and $p_i$ is the probability that flare $i$ is a true flare as assigned by \texttt{stella}.
+We compare the calculated $R_0$ to measured flare rates for all stars we measured $P_\textrm{rot}$ for. The
+results are presented in Figure~\ref{fig:prot_histograms}.
+
+\begin{figure*}[ht!]
     \script{prot_histograms.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/prot_histograms.pdf}
+        \includegraphics[width=\textwidth]{figures/prot_histograms.pdf}
         \caption{
-            Rotation periods and flare rates for M, K, and G stars (top to bottom).
+            Comparison of Rossby Number, $R_0$ and flare rate for young GKM stars.
+            We find no change in the average flare rate for GKM stars $< 250$\,Myr.
+            We see evidence that as $R_0$ increases, the average flare rate decreases.
+            This is similar to results presented in \cite{medina20}, however our sample extends this
+            trend to young GKM stars, while previous results were limited to nearby M dwarfs. The top row are
+            stars with ages $4.5 - 50$\,Myr; the bottom row are stars with ages $50 - 250$\,Myr. The
+            histograms are colored by number of stars in each bin.
         }
         \label{fig:prot_histograms}
     \end{centering}
-\end{figure}
+\end{figure*}
+
+We evaluate the relationship between age, spectral type, flare rate, and $R_0$. We divide the sample between stars
+younger and older than 50~Myr, which roughly correlates to the age at which GKM stars turn onto the main sequence.
+For stars younger than 50~Myr, we find the flare rate slightly decreases with increasing $R_0$, although there is a
+significant amount of scatter in this relationship. For stars between $50 - 250$~Myr, we see this relationship much
+clearer. For M stars, we see minimal evolution in both average flare rate and $R_0$ between the two samples. For K
+stars, we see $R_0$ evolving over the first 250~Myr, while the scatter in the flare rate decreases. For G stars, we
+see the scatter in $R_0$ decreasing, and the average flare rate across the sample decreases. We present a compiled histogram
+for all stars in our sample in the right column of Figure~\ref{fig:prot_histograms}.
+
+To better understand this trend, we fit three types of functions: (i) a constant value, (ii) a single power law, and
+(iii) a piece-wise function consisting of a constant value and a power law. For (iii), we computed these fits across a range
+of $R_0$ for where the turnover should occur. We binned the cumulative dataset consisting of all GKM stars into 50 evenly-spaced bins
+in log-space from $log_{10}(R_0) = [-2, 0]$. We computed the $\chi^2$ between
+each of these fits and the data. For stars $4.5 - 50$~Myr, we find the distribution is best-fit with a single
+power law with slope $m = -0.243 \pm 0.043$ and y-intercept $b = -1.221 \pm 0.061$. Converting the $\chi^2$ to a standard
+deviation, we find a single fit is preferred by $\sim 3\sigma$. For stars $50 - 250$~Myr, we find the distribution
+is best-fit with a piece-wise function of the form
+
+\begin{equation}
+  \mathcal{R} =
+  \Bigg \{
+  \begin{array}{ll}
+        C & R_0 \leq 0.15 \\
+        10^b * R_0^m  & R_0 > 0.15 \\
+  \end{array}
+\end{equation}
+
+where $\mathcal{R}$ is the flare rate, $C = 0.126 \pm 0.006$, $m = -0.986 \pm 0.119$, and $b = -1.687 \pm 0.078$.
+We test how our bin size affected our $R_0$ turnover. To do this, we refit our data assuming binning from $20 - 100$
+bins and find $R_0$ to be consistent with $R_0 = 0.15 \pm 0.02$. The location of the turnover is consistent to
+within $1\sigma$ with what has been seen in other observations of magnetic saturation for partially and
+fully convective stars \citep[e.g. $L_X/L_\textrm{bol}$; ][]{wright18}.
 
 \section{Discussion}\label{sec:discuss}
 
@@ -368,15 +422,8 @@ statistical sample of stars with similar ages and $T_\textrm{eff}$.
 We measured the flare rates of planet hosting stars $< 300$\,Myr, comparable to the ages of our primary sample.
 We followed the methods outlined in Section~\ref{sec:methods} to detect and vet flares. For each star, we created
 an equivalent sample with respect to both age and $T_\textrm{eff}$ to compare the flare rates too. We considered
-stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculate the overall
-flare rate as described in \cite{Feinstein22}:
-
-\begin{equation}
-  \mathcal{R} = \frac{1}{\tau_\textrm{obs}} \left( \sum_{i=1}^{N} p_i \right)
-\end{equation}
-
-where $\mathcal{R}$ is the flare rate in day$^{-1}$, $\tau_\textrm{obs}$ is the total amount of time a target was
-observed with TESS, and $p_i$ is the probability that flare $i$ is a true flare as assigned by \texttt{stella}. We present
+stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculate the flare rate
+following Equation~\ref{eq:fr}. We present
 the flare rates of planet-hosting stars and a comparable sample of stars in Figure~\ref{fig:yp_rates} and report the measured
 rates in Table~\ref{tab:yp_rates}. For the comparable sample, we report the median flare rate, and the lower 16\textsuperscript{th}
 and upper 84\textsuperscript{th} percentiles.
