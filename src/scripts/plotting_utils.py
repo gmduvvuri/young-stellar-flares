@@ -11,7 +11,8 @@ from paths import (
     scripts as script_dir
 )
 
-__all__ = ['set_rcparams', 'teff_colorbar', 'prob_colorbar', 'age_colorbar']
+__all__ = ['set_rcparams', 'teff_colorbar', 'prob_colorbar', 'age_colorbar',
+           'get_galex_colormap']
 
 def set_rcparams():
     tab = Table.read(os.path.join(data_dir,'rcparams.txt'), format='csv')
@@ -49,3 +50,22 @@ def age_colorbar(short=False):
         dat = np.load(os.path.join(data_dir, 'parula_data.npy'))
     parula = LinearSegmentedColormap.from_list('parula', dat)
     return parula
+
+
+def get_galex_colormap(channel='fuv'):
+    """ Color maps used for GALEX data. """
+    clist = ['#000000', '#1f363dff', '#284751ff', '#305865ff',
+             '#40798cff', '#589197ff', '#70a9a1ff', '#87b5a2ff',
+             '#9ec1a3ff', '#b7d1b3ff',
+             '#cfe0c3ff', '#d7e6cd']
+    ccmap = LinearSegmentedColormap.from_list('rossby', clist)
+
+    plist = ['#f6e5cbff',
+             '#f7c4a5ff', '#9e7682ff',
+             '#605770ff', '#4d4861ff', '#0d1321']
+    pcmap = LinearSegmentedColormap.from_list('rossby', plist).reversed()
+
+    if channel=='fuv':
+        return pcmap
+    else:
+        return ccmap

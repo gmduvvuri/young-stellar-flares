@@ -298,7 +298,7 @@ percentiles from the MCMC fit.
 \begin{figure*}[ht!]
     \script{mcmc_results.py}
     \begin{centering}
-        \includegraphics[width=3\textwidth, trim={0 0 30mm 0}, clip]{figures/mcmc_results.pdf}
+        \includegraphics[width=3.4\textwidth, trim={0 0 30mm 0}, clip]{figures/mcmc_results.pdf}
         \caption{
             Measured flare-frequency distribution slopes, $\alpha$, as a function
             of stellar effective temperature, $T_\textrm{eff}$ and age.
@@ -408,6 +408,55 @@ fully convective stars \citep[e.g. $L_X/L_\textrm{bol}$; ][]{wright18}.
 \section{Discussion}\label{sec:discuss}
 
 
+\subsection{Correlations with Far- and Near-Ultraviolet Flux}
+
+X-ray luminosity surveys of stars have revealed a saturation limit with respect to
+the star's rotation period. Namely, there is no evolution in $L_X/L_\textrm{bol}$ for
+stars with $P_\textrm{rot} < 10$\,days \citep{Pizzolato03}.
+
+The Far- and Near-Ultraviolet (FUV/NUV) is another tracer of magnetic activity. Young
+stars are known to have excess luminosity in both of these wavelengths \citep{}. We use
+archival observations from the \textit{Galaxy Evolution Explorer}
+\citep[\textit{GALEX};][]{martin05} to search for trends in FUV/NUV saturation and flare
+rate saturation. \textit{GALEX} provides broad FUV photometry from $1350-1750$
+and NUV photometry from $1750-2750$. We crossmatch our targets with the \textit{GALEX}
+catalog. We follow the sample selection methods outline in \citep{schneider18}. We search
+a $10''$ radius around the coordinates of each target in our sample. We include targets with
+no bad photometric flags (e.g. \texttt{fuv\_artifact} or \texttt{nuv\_artifact == 0}) as defined
+in the catalog. This is recommended by the \textit{GALEX} documentation, as flags could be
+assigned due to bright star window reflection, dichroic reflection, detector run proximity,
+or bright star ghost. We exclude targets with measured magnitudes brighter than 15, which
+marks the saturation limit for both the FUV and NUV photometers \citep{morrissey07}.
+
+Based on these thresholds, we find that 462 stars in our sample have NUV photometry and
+139 stars have FUV photometry. We explore if flare rate saturation and FUV/NUV saturation
+are correlated with the derived $R_0$ per star. We present our results in Figure~\ref{fig:galex}.
+We present the measured FUV/NUV flux normalized by the J-band flux of the star, since it
+is the fractional flux which acts as an activity indicator. While bolometric luminosities would
+be a better normalizing factor, we find the majority of stars in our target do not have
+this parameter measured. To assess FUV/NUV correlations in a larger statistical sense, we thus
+keep the normalization to $f_J$.
+
+\begin{figure}[ht!]
+    \script{galex.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/galex.pdf}
+        \caption{
+            Calculated NUV (left) and FUV (right) GALEX flux for stars in our
+            sample. We normalize these values by the J-band flux of the star.
+            We find no strong correlation between the NUV/FUV flux and the measured
+            flare rate or Rossby number.
+            The top row shows GKM stars $<50$~Myr; the bottom row
+            shows GKM stars $\geq 50$~Myr. M stars are shown as circles, K stars as
+            triangles, and G stars as squares. We note that $f_{NUV}$ traces the
+            photosphere of GK stars, and therefore may not be the best comparison
+            bandpass when looking for trends in magnetic activity.
+        }
+        \label{fig:galex}
+    \end{centering}
+\end{figure}
+
+
 \subsection{Comparison to Young Planet Host Stars}
 
 The all-sky observing strategy of TESS has revealed a new population of young transiting exoplanets.
@@ -424,9 +473,9 @@ We followed the methods outlined in Section~\ref{sec:methods} to detect and vet 
 an equivalent sample with respect to both age and $T_\textrm{eff}$ to compare the flare rates too. We considered
 stars with ages $\pm 30$\,Myr of the planet hosting star and $T_\textrm{eff} \pm 1000$\,K. We calculate the flare rate
 following Equation~\ref{eq:fr}. We present
-the flare rates of planet-hosting stars and a comparable sample of stars in Figure~\ref{fig:yp_rates} and report the measured
-rates in Table~\ref{tab:yp_rates}. For the comparable sample, we report the median flare rate, and the lower 16\textsuperscript{th}
-and upper 84\textsuperscript{th} percentiles.
+the flare rates of planet-hosting stars and a comparable sample of stars in Figure~\ref{fig:yp_rates}
+and report the measured rates in Table~\ref{tab:yp_rates}. For the comparable sample, we report the
+median flare rate, and the lower 16\textsuperscript{th} and upper 84\textsuperscript{th} percentiles.
 
 \begin{figure}[ht!]
     \script{yp_rates.py}
@@ -477,17 +526,6 @@ HD 110082 & $250_{-70}^{+50} $ & 0.000 & $0.047_{-0.020}^{+0.067}$ \\
 \enddata
 \end{deluxetable}
 
-\subsection{Correlation to Other Metrics of Magnetic Saturation}
-
-X-ray luminosity surveys of stars have revealed a saturation limit with respect to
-the star's rotation period. Namely, there is no evolution in $L_X/L_\textrm{bol}$ for
-stars with $P_\textrm{rot} < 10$\,days \citep{Pizzolato03}.
-
-Here, we explore if flare rates evolve as a function of rotation period. We used our
-measured $P_\textrm{rot}$ as described in Section~\ref{subsec:prot}. Due to TESS's orbit,
-we limit our search of $P_\textrm{rot}$ to $< 20$\,days. This should not bias our analysis as
-young stars are known to rotate on short timescales \citep[e.g.][]{west15, popinchalk23}. We
-present our results in Figure~\ref{fig:prot}.
 
 
 \subsection{Applications to ULLYSES}
