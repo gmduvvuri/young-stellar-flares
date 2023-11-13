@@ -159,10 +159,10 @@ cbar = plt.colorbar(im, cax=ax4, orientation='horizontal')
 ax4.set_title(r'$log_{10}(f_{FUV} / f_J)$', fontsize=16)
 ax4.tick_params(top=True, labeltop=True, bottom=False, labelbottom=False)
 
-ax5.plot(100,100,marker='o',label='M stars', lw=0, color='k')
-ax5.plot(100,100,marker='^',label='K stars', lw=0, color='k')
-ax5.plot(100,100,marker='s',label='G stars', lw=0, color='k')
-ax5.legend(bbox_to_anchor=(0.3, -0.4, 1.4, .102), loc=3,
+ax6.plot(100,100,marker='o',label='M stars', lw=0, color='k')
+ax6.plot(100,100,marker='^',label='K stars', lw=0, color='k')
+ax6.plot(100,100,marker='s',label='G stars', lw=0, color='k')
+ax6.legend(bbox_to_anchor=(0.3, -0.4, 1.4, .102), loc=3,
            ncol=3, mode="expand", borderaxespad=0.,
            markerscale=2)
 
@@ -175,18 +175,18 @@ for ax in [ax1, ax2, ax5, ax6]:
 
 ax1.set_xticklabels([])
 ax2.set_xticklabels([])
-ax2.set_yticklabels([])
-ax6.set_yticklabels([])
+ax1.set_yticklabels([])
+ax5.set_yticklabels([])
 
-ax2.set_yticklabels([])
-ax5.set_ylabel('Flare Rate [day$^{-1}$]', y=1.1)
-ax5.set_xlabel('Rossby Number', x=1.0)
 
-ax7 = ax2.twinx()
+ax6.set_ylabel('Flare Rate [day$^{-1}$]', y=1.1)
+ax6.set_xlabel('Rossby Number', x=1.0)
+
+ax7 = ax1.twinx()
 ax7.set_ylabel('4.5 - 50 Myr')
 ax7.set_yticks([])
 
-ax8 = ax6.twinx()
+ax8 = ax5.twinx()
 ax8.set_ylabel('50 - 250 Myr')
 ax8.set_yticks([])
 
