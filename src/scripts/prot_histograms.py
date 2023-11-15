@@ -158,5 +158,7 @@ axes[3].set_title('GKM stars combined')
 
 plt.subplots_adjust(wspace=0.2, hspace=0.1)
 
+#plt.savefig('/Users/belugawhale/Desktop/prot_histograms.png', dpi=300,
+#            bbox_inches='tight', transparent=True)
 plt.savefig(os.path.join(figures_dir, 'prot_histograms.pdf'), dpi=300,
             bbox_inches='tight')
