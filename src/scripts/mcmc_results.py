@@ -66,19 +66,20 @@ for i, fn in enumerate(fits):
 #####################################
 # Plot data from Ilin et al. (2020) #
 #####################################
+imarker = 's'
 hyades_slopes = -np.array([2.11, 1.89, 1.94, 2.17, 1.99, 1.96])+1
 plt.errorbar(695, np.nanmedian(hyades_slopes),
              xerr=75, yerr=np.nanstd(hyades_slopes),
-             color='k', marker='o')
+             color='k', marker=imarker)
 
 pleiades_slopes = -np.array([2.13, 2.06, 2.06, 1.99, 2.32, 1.92, 1.91]) + 1
 plt.errorbar(127.4, np.nanmedian(pleiades_slopes),
              xerr=8, yerr=np.nanstd(pleiades_slopes),
-             color='k', marker='o')
+             color='k', marker=imarker)
 
 praesepe_slopes = -np.array([2.09, 2.0, 1.95, 1.89, 2.39, 1.86, 1.91]) + 1
 plt.errorbar(617, np.nanmedian(praesepe_slopes), yerr=np.nanstd(praesepe_slopes),
-             color='k', marker='o', label='Ilin et al. (2020)')
+             color='k', marker=imarker, label='Ilin et al. (2020)')
 
 ##########################################
 # Plot data from Feinstein et al. (2022) #
@@ -94,10 +95,13 @@ plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
            markerscale=2)
 
 plt.xscale('log')
+plt.ylim(-1.8, 0.0)
 plt.xlabel('Age [Myr]', fontsize=24)
 plt.ylabel('Flare Frequency\nDistribution Slope, ' + r'$\alpha$', fontsize=24)
 
 ax.set_rasterized(True)
 
+#plt.savefig('/Users/belugawhale/Desktop/mcmc_results.png', dpi=300,
+#            bbox_inches='tight', transparent=True)
 plt.savefig(os.path.join(figures_dir,'mcmc_results.pdf'),
             dpi=300, bbox_inches='tight')
