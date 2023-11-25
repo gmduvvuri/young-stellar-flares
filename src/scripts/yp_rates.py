@@ -22,8 +22,9 @@ cmap = teff_colorbar().reversed()
 ### Load tables and make appropriate data cuts ###
 ##################################################
 flares = Table.read(os.path.join(data_dir,'planet_host_rates.csv'), format='csv')
-tab = Table.read(os.path.join(data_dir,'llamaradas-estelares_all_parameters_withcuts_final_v2.csv'), format='csv')
-tab = tab[(tab['noise_cut1']==0) & (tab['noise_cut2']==0) & (tab['ed'] > 0) & (tab['age']>0)]
+tab = Table.read(os.path.join(data_dir,'llamaradas-estelares_all_parameters_withhotcuts_final_v4.csv'),
+                 format='csv')
+tab = tab[(tab['ed'] > 0) & (tab['age']>0)]
 
 #############################
 ### Calculate flare rates ###
@@ -111,8 +112,7 @@ ax2.spines['top'].set_visible(False)
 
 ax1.set_xticks([])
 
-d = .015  # how big to make the diagonal lines in axes coordinates
-# arguments to pass to plot, just so we don't keep repeating them
+d = .015
 kwargs = dict(transform=ax1.transAxes, color='k', clip_on=False, lw=2.5)
 ax1.plot((-d, +d), (-d-0.03, +d), **kwargs)        # top-left diagonal
 ax1.plot((1 - d, 1 + d), (-d-0.03, +d), **kwargs)  # top-right diagonal
