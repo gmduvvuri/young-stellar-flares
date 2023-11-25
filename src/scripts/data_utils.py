@@ -20,7 +20,7 @@ def get_age_ranges(age_ranges):
        `ages[:,2] = upper age error`.
     """
     tab = Table.read(os.path.join(data_dir,
-                                  'llamaradas-estelares_all_parameters_withcuts_final_v2.csv'),
+                                  'llamaradas-estelares_all_parameters_withhotcuts_final_v4.csv'),
                      format='csv')
 
     ages = np.zeros((len(age_ranges), 3))

@@ -13,7 +13,7 @@ pwd2 = os.path.join(data_dir, 'mcmc_fits/fitted_data')
 sample_files = np.sort([os.path.join(pwd1, i) for i in os.listdir(pwd1)])
 data_files = np.sort([os.path.join(pwd2, i) for i in os.listdir(pwd2)])
 sample_sizes = np.load(os.path.join(data_dir,
-                                    'mcmc_fits/mcmc_sample_sizes.npy'),
+                                    'mcmc_fits/mcmc_sample_sizes_v4.npy'),
                        allow_pickle=True).item()
 
 ## Setup the figure ##
@@ -23,15 +23,14 @@ axes = axes.reshape(-1)
 
 ## Loop through the files ##
 for i, fn in enumerate(sample_files):
-
     # Get the age range from the data file
     name = fn.split('/')[-1]
-    fn_ages = name.split('_')[-2].split('-')
+    fn_ages = name.split('_')[2].split('-')
     fn_ages = [float(fn_ages[0][1:]), float(fn_ages[1])]
 
     # Get the teff range from the data file
-    fn_teff = name.split('_')[-1].split('-')
-    fn_teff = [float(fn_teff[0][1:]), float(fn_teff[1][:-4])]
+    fn_teff = name.split('_')[3].split('-')
+    fn_teff = [float(fn_teff[0][1:]), float(fn_teff[1])]
 
     # Nflares & Nstars in sample
     nflares = sample_sizes[name[13:]][0]
@@ -70,7 +69,7 @@ for i, fn in enumerate(sample_files):
     axes[i].text(s=r'$N_{stars}$ = ' + str(nstars),
                  x=35, y=-1.9, fontsize=12, ha='right')
 
-    # Set some titles
+    # Make some titles
     if i < 5:
         axes[i].set_title('{0}-{1} K'.format(int(fn_teff[0]), int(fn_teff[1])),
                           fontsize=14, fontweight='bold')

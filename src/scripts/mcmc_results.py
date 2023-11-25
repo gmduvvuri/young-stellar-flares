@@ -15,7 +15,6 @@ from paths import (
 )
 
 set_rcparams()
-
 teff_cbar = teff_colorbar().reversed()
 
 temp_ranges = np.array([[2300, 3400], [3400, 3850],
@@ -40,7 +39,7 @@ ages = get_age_ranges(age_ranges)
 ####################
 for i, fn in enumerate(fits):
     dat = np.load(fn)
-    label = fn.split('T')[-1].split('.')[0]
+    label = fn.split('T')[-1].split('.')[0][:-3]
 
     t = (temp_ranges[i][0] + temp_ranges[i][1])/2.0
 
@@ -48,14 +47,14 @@ for i, fn in enumerate(fits):
     hexnum = matplotlib.colors.rgb2hex(rgba_color)
 
     # Ignores groupings with not enough flares for a good FFD fit
-    if fn == 'slope_fits_T3850-4440.npy':
-        q = np.array([0,1,3,4,5,6],dtype=int)
-    elif fn == 'slope_fits_T5270-5930.npy':
-        q = np.arange(1,7,1,dtype=int)
-    else:
-        q = np.arange(0,7,1,dtype=int)
+    #if fn == 'slope_fits_T3850-4440_v3.npy':
+    #    q = np.array([0,1,3,4,5,6],dtype=int)
+    #elif fn == 'slope_fits_T5270-5930_v3.npy':
+    #    q = np.arange(1,7,1,dtype=int)
+    #else:
+    q = np.arange(0,7,1,dtype=int)
 
-    # Plot!
+    # Plot
     plt.errorbar(ages[:,0][q],
                  dat[0][:,0][q],
                  xerr=[ages[:,1][q], ages[:,2][q]],

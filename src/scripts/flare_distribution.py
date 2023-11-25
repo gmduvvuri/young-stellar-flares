@@ -16,9 +16,9 @@ from paths import (
 set_rcparams()
 
 tab = Table.read(os.path.join(data_dir,
-                              'llamaradas-estelares_all_parameters_withcuts_final_v2.csv'),
+                              'llamaradas-estelares_all_parameters_withhotcuts_final_v4.csv'),
                  format='csv')
-tab = tab[(tab['noise_cut1']==0) & (tab['noise_cut2']==0) & (tab['ed'] > 0) & (tab['age']>0)]
+tab = tab[(tab['ed'] > 0) & (tab['age']>0)]
 
 sample = Table.read(os.path.join(data_dir,'moca_sample.csv'), format='csv')
 
@@ -95,8 +95,8 @@ ax2.set_xlabel(r'log$_{10}$(Flare Energy [erg])')
 ax2.set_ylabel(r'log$_{10}$(ED [sec])')
 
 for ax in [ax1, ax2]:
-    ax.set_xlim(25,35)
-    ax.set_ylim(-2.0,4.2)
+    ax.set_xlim(26,35)
+    ax.set_ylim(-1.65,4.2)
 
 ax0.set_rasterized(True)
 ax1.set_rasterized(True)
