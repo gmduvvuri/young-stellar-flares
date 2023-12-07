@@ -19,40 +19,24 @@ Boulder, UCB 600, Boulder, CO 80309}
 
 % Abstract with filler text
 \begin{abstract}
-    Photometric exoplanet detection missions have revolutionized our understanding
-    of stellar activity. Stellar flares are short-duration high-energy radiation
-    outbursts which can be readily seen across young (< 800\,Myr) stars and even
-    in high counts on mature M dwarfs. Here, we present the results of measuring
-    stellar flare rates for very young stars, with ages $4.5 - 200$\,Myr right
-    after they formed to understand the early evolution of magnetic activity. We
-    have selected a sample of 5,700 stars which belong to 26 associations,
-    nearby young moving groups, or clusters. We identified $\sim 29,000$ flares
-    using the \texttt{stella} machine-learning algorithm. We measured the flare-
-    frequency distribution slopes as a function of age and stellar effective
-    temperature. Finally, we measure the flare rates of young planet-hosting stars and
-    compare flare rates to a larger sample of stars with similar ages and $T_\textrm{eff}$.
-    We find that the majority of planet-hosting stars have lower flare rates, with the exception of
-    HIP 67522, AU Mic, DS Tuc, and TOI 451.
+  Stellar flares are short-duration ($<$\,hours) bursts of radiation associated with magnetic reconnection events. The magnetic activity of stars is known to decrease as a function of age and Rossby number, $R_0$, a parameterization of how strong the Coriolis force is. Here, we detect and characterize the flare properties of $\sim$~\textcolor{red}{n} stars younger than 300~Myr which have been observed by the Transiting Exoplanet Survey Satellite at 2-minute cadence. Our stars are bona fide, high-probability, or candidate members of 26 nearby young moving groups, clusters, or associations.  We identified \textcolor{red}{n} flares originating from \textcolor{red}{n} stars. We robustly measured the rotation periods of $1,847$~stars. We measure the flare frequency distribution (FFD) slope as a function of both age and spectral type. We find the FFD slope, $\alpha$, saturates for all spectral types at $\alpha = -0.5$ and does not evolve over 300~Myr. Additionally, we find that $R_0$ and flare rate for stars $t_\textrm{age} = 100 -- 300$~Myr are saturated out to $R_0 = 0.12$, which is consistent with other indicators of magnetic activity. We find the FFD slope for stars with $R_0 \leq 0.12$ are shallower than stars with $R_0 > 0.12$, suggesting the Coriolis force plays a role in generating more high-energy flares. We cross match our targets with \textit{GALEX} and find no correlation between flare rate and Far- and Near-Ultraviolet flux. Finally, we compare the flare rates of planet hosting stars to comparable, larger samples of stars and find the majority of these stars are relatively flare quiet. This may impact the atmospheric evolution of young short-period exoplanets.
+
 \end{abstract}
 
 % Main body with filler text
 \section{Introduction}
 \label{sec:intro}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
-Curabitur dictum gravida mauris, consectetuer id, vulputate a, magna.
-Donec vehicula augue eu neque, morbi tristique senectus et netus et.
-Mauris ut leo, cras viverra metus rhoncus sem, nulla et lectus vestibulum.
-Phasellus eu tellus sit amet tortor gravida placerat.
-Integer sapien est, iaculis in, pretium quis, viverra ac, nunc.
-Praesent eget sem vel leo ultrices bibendum.
-Aenean faucibus, morbi dolor nulla, malesuada eu, pulvinar at, mollis ac.
-Curabitur auctor semper nulla donec varius orci eget risus.
-Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam.
-Duis eget orci sit amet orci dignissim rutrum.
+Stellar flares are the radiation component of magnetic reconnection events \citep{}. Such events are readily seen on the Sun \citep{}, particularly now as we enter a maximum in the solar cycle \citep{}. Such events can be used to understand the magnetic activity of other stars \citep{}. Additionally, by studying stellar flares we can understand how these short-duration events may impact short-period exoplanet evolution \citep{}. While we cannot resolve stellar flare events on other stars, we can detect and characterize both spectroscopic and photometric signatures of such events. Spectroscopic characterization of stellar flares inform our understanding of non-thermal processes affiliated with such events, e.g. coronal mass ejections \citep{} or proton beams \citep{}. They can also inform our understanding of stellar plasma is displaced during these events \citep{}.
 
-This paper is presented as follows.
+Photometric observations of stars are more readily available thanks to exoplanet missions, and allow us to statistically characterize flare rates and energies. Within time-series photometry, stellar flares can be identified by a sharp rise in the stellar flux and a subsequent exponential decay, corresponding to the cooling rate \citep{}. \textit{Kepler} provided long-baseline high-cadence observations used to identify stellar flares. There has been extensive studies of flares in \textit{Kepler} data, from the statistics of superflares on solar-type stars \citep[e.g.]{notsu13, shibayama13, maehara15, okamoto21} to low-mass stars \citep[e.g.]{Hawley14, silverberg16}. \cite{davenport19} found that flare activity decreased with increasing rotation period for 347 GKM stars. However, the flare frequency distribution (FFD) slope did not change significantly as a function of age. As a caveat, the ages of the stars were determined based on their rotation periods alone, relying on the assumption that gyrochronology alone accurately ages stars.
+
+
+After the failure of two reaction wheels, \textit{Kepler} was repurposed to the \textit{K2} mission \citep{Howell14}. \textit{K2} provided 70-day baseline observations for a handful of young stars in groups such as Upper Scorpius,  Pleiades, Hyades, and Praespe clusters. \cite{ilin19} analyzed flares K and M stars in these clusters and measured FFD slopes of ...
+
+More recently, the Transiting Exoplanet Survey Satellite \citep[TESS;][]{ricker15} has provided near all-sky photometric observations at 30-minute cadence or less. Such an observing strategy has allowed for more detailed studies of young stellar flares from nearby young moving groups and associations, which are disperse in the sky \citep{}.
+
+The paper is presented as follows. In Section~\ref{sec:methods}, we describe our sample, stellar flare identification and fitting methods, and methods for measuring stellar rotation periods. In Section~\ref{sec:results}, we present our flare-frequency distribution (FFD) fits as a function of stellar age, $T_\textrm{eff}$, and $R_0$. In Section~\ref{sec:discuss}, we search for correlations in flare rates with FUV and NUV observations from \textit{GALEX} and place the flare rates of young planet hosting stars in the context of our broader sample. We conclude in Section~\ref{sec:conclusions}. We provide additional figures and tables in Section~\ref{appendix:supp_ffds}.
 
 \section{Methodology}
 \label{sec:methods}
@@ -320,8 +304,6 @@ of stars and $\sim 7\times$ the number of flares than their sample. This could
 result in a more complete FFD compared to previous work.
 
 
-\subsection{Fitting for $\alpha$ and $\beta$}
-
 
 \subsection{Truncated Power-Law Fits}
 
@@ -338,9 +320,20 @@ $\alpha$. We fit the slopes using the MCMC method implemented in \texttt{emcee}
 \citep{goodman10, emcee}, using the log-likelihood function in \cite{seligman22}.
 We fit for $A_*$ and $\alpha_T$. We initialized the MCMC fit with textcolor{red}{n}
 walkers and evaluated the fit over textcolor{red}{n} steps. The first textcolor{red}{n}
-steps were discarded upon visual inspection. The results are presented in Figure~\ref{fig:trunc}.
+steps were discarded upon visual inspection. The results are presented in Figure~\ref{fig:truncated}.
 
-\section{Flare Rates Compared to $R_0$}
+\begin{figure}[ht!]
+    \script{truncated.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/truncated.pdf}
+        \caption{
+            Flare frequency distributions, as a function of flare amplitude, for stars with $R_0 \leq 0.12$ (red) and stars with $R_0 > 0.12$ (black). We present the best-fit model, and the best-fit values of the model slope and normalization factor in the legends. Our sample of $R_0 \leq 0.12$ includes 13,132 flares from 800 stars; our sample of $R_0 > 0.12$ includes 5,603 flares from 747 stars. We find the stars with smaller Rossby numbers have shallower slopes, consistent with more, high-energy flares and potentially larger convective regions \citep{seligman22}.
+        }
+        \label{fig:truncated}
+    \end{centering}
+\end{figure}
+
+\subsection{Flare Rates Compared to $R_0$}
 
 The Rossby number, $R_0$, is a term which marginalizes over several properties which are known to
 affect the stellar dynamo, such as the rotation period and stellar mass. We convert our measured
@@ -531,29 +524,13 @@ HD 110082 & $250_{-70}^{+50} $ & 0.000 & $0.047_{-0.020}^{+0.067}$ \\
 
 
 
-\subsection{Applications to ULLYSES}
+\subsection{Evidence of Stellar Cycles}
 
-Measuring Far-Ultraviolet (FUV) total flux output and flare rates are
-essential for understanding the contributions of flares to exoplanet atmospheric
-mass-loss and disequilibrium chemistry. An equivalent, but significantly smaller sample
-to the stars studied here are the those observed as part of the \textit{Hubble Space Telescope}
-(HST) Ultraviolet Legacy Library of Young Stars as Essential Standards (ULLYSES)
-program. This survey observed 71 K- to M-type T Tauri stars in nine young
-galactic associations.
+The Sun goes through a 12-year solar cycle, which oscillates between times of high and low activity. The solar cycle manifests itself in a variety of observables, including a change in the flare rate, by a factor of 10 \citep{}, and the flare energies released \citep{}. Constraints of stellar cycles have predominantly relied on photometry \citep[see recent review by ][]{cycleReview}. However, tracing stellar cycles via stellar flares may be more reliable, as flares are a direct consequence of magnetic activity. \cite{} explored measuring the stellar cycle length of KIC 8507979, a star in the \textit{Kepler} field which was observed for 18 90-day quarters. They found the flare rate decreased over each quarter, which could be fit by $L_\textrm{fl}/L_\textrm{Kp} = (-9.96 \pm 3.94) \times 10^{-2} \times t_\textrm{yr} + (2.43 \pm 0.11)$, where $t_\textrm{yr}$ is the time in years, and $L_\textrm{fl}/L_\textrm{Kp}$ is a parameterization of the \textit{Kepler} flare rate as defined by \citep{Hawley14}.
 
-We can extend the results presented here to estimate how many flares may be present
-in these important FUV observations.
+It is possible that the length of the stellar cycle is related to the $P_\textrm{rot}$/ $R_0$ of the star as ... \citep{}. If this is the case, then stars with $P_\textrm{rot}$ will have shorter stellar cycle lengths. The TESS Extended Mission has provided a five-year baseline, similar to \textit{Kepler}, although the sampling is sparser. Within our sample of fast rotators, we searched for evidence of stellar cycles. Our sample contains 31 stars which have been observed for $t_\textrm{obs} \geq 400$\,days and $n_\textrm{flare} > 100$.
 
-Additionally, we analyzed the TESS light curves for all of the ULLYSES targets, when
-available at 2-minute cadence. We identified a total of \textcolor{red}{n} flares.
-This is inconsistent with the overall flare statistics identified in this work, and is
-overall unexpected for young stars which are known to be more magnetically active
-\citep{ilin19, feinstein20}. This could suggest that there is some bias in the way
-the ULLYSES sample was constructed, and that it is unexpected to find any flares in the
-FUV data. Alternatively, it could be that the ongoing accretion luminosity results
-in a brighter host star, such that the flares we normally would see are drowned
-out by the increased baseline luminosity. We do not include this flare in our
-overall statistical analysis of TESS flare rates for young stars.
+We search for evidence of changes in the stellar magnetic activity by looking at (i) the maximum flare energy in a given period of time and (ii) the flare rate over that same period of time. We grouped our observations by year observed, even if the star was not continuously observed throughout that year.
 
 
 \section{Conclusions}\label{sec:conclusions}

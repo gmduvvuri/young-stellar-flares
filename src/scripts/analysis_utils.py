@@ -1,9 +1,10 @@
 import numpy as np
 from astropy import units
+from mpmath import expint, mp, fp
 from scipy.optimize import curve_fit
 from astropy import constants as const
 
-__all__ = ['get_energy_limits', 'planck', 'fit_ffd', 'linear']
+__all__ = ['get_energy_limits', 'planck', 'fit_ffd', 'linear', 'logpdf']
 
 def planck(lam, T, rad):
     """
@@ -135,3 +136,10 @@ def fit_ffd(data, limit, yerr=None):
     data = np.array([logx, logn, np.sqrt(n[mask])])
 
     return popt, perr, data.T
+
+
+# Functional form of PDF with respect to log_10 a
+def logpdf(loga, q, astar, amp_min):
+    a = 10.**loga
+    norm = amp_min**(q-1) / fp.mpf(expint(q, amp_min/astar)) * np.log(10)
+    return norm * a**-(q-1) * np.exp(-a/astar)
