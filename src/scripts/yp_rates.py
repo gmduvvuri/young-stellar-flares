@@ -22,7 +22,7 @@ cmap = teff_colorbar().reversed()
 ### Load tables and make appropriate data cuts ###
 ##################################################
 flares = Table.read(os.path.join(data_dir,'planet_host_rates.csv'), format='csv')
-tab = Table.read(os.path.join(data_dir,'llamaradas-estelares_all_parameters_withhotcuts_final_v4.csv'),
+tab = Table.read(os.path.join(data_dir,'final_flare_catalog_v6.csv'),
                  format='csv')
 tab = tab[(tab['ed'] > 0) & (tab['age']>0)]
 

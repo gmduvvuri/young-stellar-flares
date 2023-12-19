@@ -17,7 +17,7 @@ from paths import (
 
 set_rcparams()
 
-tab = Table.read(os.path.join(data_dir, 'combined_v4.csv'),
+tab = Table.read(os.path.join(data_dir, 'combined_prot_flarerate_v6.csv'),
                  format='csv')
 tab = tab[tab['Good'] == 1]
 

@@ -16,13 +16,14 @@ from paths import (
 set_rcparams()
 
 tab = Table.read(os.path.join(data_dir,
-                              'llamaradas-estelares_all_parameters_withhotcuts_final_v4.csv'),
+                              'final_flare_catalog_v6.csv'),
                  format='csv')
 tab = tab[(tab['ed'] > 0) & (tab['age']>0)]
 
 sample = Table.read(os.path.join(data_dir,'moca_sample.csv'), format='csv')
 
-fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, figsize=(6,18))
+#fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, figsize=(6,18))
+fig, (ax0, ax2) = plt.subplots(nrows=2, figsize=(6,12))
 fig.set_facecolor('w')
 
 ed = (tab['ed']*units.min).to(units.s)
@@ -67,6 +68,7 @@ ax0.set_yscale('log')
 ax0.set_xscale('log')
 
 #================== AX1 ========================#
+"""
 prob = prob_colorbar()
 
 img = ax1.scatter(np.log10(erg.value[q]), np.log10(ed.value[q]),
@@ -79,7 +81,7 @@ plt.colorbar(img, label='Probability [%]', cax=cax)
 
 ax1.set_xlabel(r'log$_{10}$(Flare Energy [erg])')
 ax1.set_ylabel(r'log$_{10}$(ED [sec])')
-
+"""
 #================== AX2 ========================#
 teff = teff_colorbar()
 
@@ -94,12 +96,12 @@ plt.colorbar(img, label='log$_{10}$(T$_{eff}$ [K])', cax=cax)
 ax2.set_xlabel(r'log$_{10}$(Flare Energy [erg])')
 ax2.set_ylabel(r'log$_{10}$(ED [sec])')
 
-for ax in [ax1, ax2]:
-    ax.set_xlim(26,35)
+for ax in [ax2]:#, ax1]:
+    ax.set_xlim(27,35)
     ax.set_ylim(-1.65,4.2)
 
 ax0.set_rasterized(True)
-ax1.set_rasterized(True)
+#ax1.set_rasterized(True)
 ax2.set_rasterized(True)
 
 plt.subplots_adjust(hspace=0.3)

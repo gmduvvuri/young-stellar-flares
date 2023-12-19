@@ -17,11 +17,12 @@ from analysis_utils import logpdf
 set_rcparams()
 
 """ GET THE DATA """
-table = Table.read(os.path.join(data_dir,'rossby_stats.csv'), format='csv')
-lo = np.load(os.path.join(data_dir,'r0_samples_lo_v4.npy'), allow_pickle=True)
-hi = np.load(os.path.join(data_dir,'r0_samples_hi_v4.npy'), allow_pickle=True)
+table = Table.read(os.path.join(data_dir,'rossby_stats_v6.csv'), format='csv')
+lo = np.load(os.path.join(data_dir,'r0_samples_lo_v6.npy'), allow_pickle=True)
+hi = np.load(os.path.join(data_dir,'r0_samples_hi_v6.npy'), allow_pickle=True)
 amp_min = 10**-1.8
 bins = np.logspace(-2,2,100)
+R0 = 0.13617449664429532
 
 
 logasamp = np.log10(np.logspace(np.log10(amp_min), 1.0))
@@ -55,12 +56,12 @@ for i in range(len(dat)):
 axes, pct = [ax, ax], [pct_short_lo, pct_short_hi]
 for i in range(len(axes)):
     if i == 1:
-        labelS = '$R_0 > 0.12$' + '\n'
+        labelS = '$R_0 >$' + str(np.round(R0,3)) + '\n'
         label = r'$\alpha = ' + '{0:.3f}'.format(table['alpha'][i]) + '_{' + \
                 '-{0:.3f}'.format(table['alpha_lo'][i]) + '}^{' + \
                 '+{0:.3f}'.format(table['alpha_hi'][i]) + '}$'
     else:
-        labelS = '$R_0 \leq 0.12$' + '\n'
+        labelS = '$R_0 \leq$' + str(np.round(R0,3)) + '\n'
         label = r'$\alpha = ' + '{0:.3f} \pm {1:.3f}$'.format(table['alpha'][i],
                                                             table['alpha_lo'][i])
     labelA = r'$A_* = ' + '{0:.3f}'.format(table['A'][i]) + '_{' + \
@@ -92,5 +93,5 @@ leg = plt.legend(ncol=2, fontsize=16, markerscale=4,
 for legobj in leg.legendHandles:
     legobj.set_linewidth(5.0)
 
-plt.savefig(os.path.join(figures_dir, 'truncated.pdf'), 
+plt.savefig(os.path.join(figures_dir, 'truncated.pdf'),
             bbox_inches='tight', dpi=300)

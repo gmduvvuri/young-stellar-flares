@@ -17,9 +17,13 @@
 \affiliation{Laboratory for Atmospheric and Space Physics, University of Colorado
 Boulder, UCB 600, Boulder, CO 80309}
 
+\author[0000-0002-0726-6480]{Darryl~Z.~Seligman}
+\altaffiliation{NSF Astronomy and Astrophysics Postdoctoral Fellow}
+\affiliation{Department of Astronomy and Carl Sagan Institute, Cornell University, 122 Sciences Drive, Ithaca, NY 14853}
+
 % Abstract with filler text
 \begin{abstract}
-  Stellar flares are short-duration ($<$\,hours) bursts of radiation associated with magnetic reconnection events. The magnetic activity of stars is known to decrease as a function of age and Rossby number, $R_0$, a parameterization of how strong the Coriolis force is. Here, we detect and characterize the flare properties of $\sim$~\textcolor{red}{n} stars younger than 300~Myr which have been observed by the Transiting Exoplanet Survey Satellite at 2-minute cadence. Our stars are bona fide, high-probability, or candidate members of 26 nearby young moving groups, clusters, or associations.  We identified \textcolor{red}{n} flares originating from \textcolor{red}{n} stars. We robustly measured the rotation periods of $1,847$~stars. We measure the flare frequency distribution (FFD) slope as a function of both age and spectral type. We find the FFD slope, $\alpha$, saturates for all spectral types at $\alpha = -0.5$ and does not evolve over 300~Myr. Additionally, we find that $R_0$ and flare rate for stars $t_\textrm{age} = 100 -- 300$~Myr are saturated out to $R_0 = 0.12$, which is consistent with other indicators of magnetic activity. We find the FFD slope for stars with $R_0 \leq 0.12$ are shallower than stars with $R_0 > 0.12$, suggesting the Coriolis force plays a role in generating more high-energy flares. We cross match our targets with \textit{GALEX} and find no correlation between flare rate and Far- and Near-Ultraviolet flux. Finally, we compare the flare rates of planet hosting stars to comparable, larger samples of stars and find the majority of these stars are relatively flare quiet. This may impact the atmospheric evolution of young short-period exoplanets.
+Stellar flares are short-duration ($<$\,hours) bursts of radiation associated with surface magnetic reconnection events. Stellar magnetic activity  generally decreases as a function of both age and of Rossby number, $R_0$, a measure of the relative dominance of the convective and rotational dynamos. For those reasons, it is worthwhile analyzing the flare population level characteristics for young, rapidly rotating stars. With this motivation, we select a sample of stars that are either (i) members, (ii) candidate members or (iii) high-probability of being  members of 26 nearby young moving groups, clusters, or associations all known to be less than 300~Myr old that have been observed by the Transiting Exoplanet Survey Satellite (TESS) at 2-minute cadence.  With this  sample of $\sim$~\textcolor{red}{n} stars younger than 300~Myr, we present detections and characterizations of the flare properties.  We identified \textcolor{red}{n} flares originating from \textcolor{red}{n} stars. Moreover, we robustly measured the rotation periods of $1,847$~stars. Finally, we measure the flare frequency distribution (FFD) slope as a function of both age and spectral type. We find the FFD slope, $\alpha$, saturates for all spectral types at $\alpha = -0.5$ and does not evolve over 300~Myr. Additionally, we find that $R_0$ and flare rate for stars $t_\textrm{age} = 100 - 300$~Myr are saturated out to $R_0 = 0.12$, which is consistent with other indicators of magnetic activity. We find the FFD slope for stars with $R_0 \leq 0.14$ are shallower than stars with $R_0 > 0.14$, suggesting the Coriolis force plays a role in generating more high-energy flares. We cross match our targets with \textit{GALEX} and find no correlation between flare rate and Far- and Near-Ultraviolet flux. Finally, we compare the flare rates of planet hosting stars to comparable, larger samples of stars and find the majority of these stars are relatively flare quiet. This may impact the atmospheric evolution of young short-period exoplanets.
 
 \end{abstract}
 
@@ -38,21 +42,23 @@ More recently, the Transiting Exoplanet Survey Satellite \citep[TESS;][]{ricker1
 
 The paper is presented as follows. In Section~\ref{sec:methods}, we describe our sample, stellar flare identification and fitting methods, and methods for measuring stellar rotation periods. In Section~\ref{sec:results}, we present our flare-frequency distribution (FFD) fits as a function of stellar age, $T_\textrm{eff}$, and $R_0$. In Section~\ref{sec:discuss}, we search for correlations in flare rates with FUV and NUV observations from \textit{GALEX} and place the flare rates of young planet hosting stars in the context of our broader sample. We conclude in Section~\ref{sec:conclusions}. We provide additional figures and tables in Section~\ref{appendix:supp_ffds}.
 
-\section{Methodology}
-\label{sec:methods}
+\section{TESS Light Curve Characterization}\label{sec:methods}
 
-\subsection{Sample Selection}
+In this section, we provide an overview of the methodology associated with this paper. The various methods described here are pertinent to the remainder of the paper. Specifically, we describe the sample selection in subsection \ref{subsec2:sample}, TESS light curve analysis in \ref{subsec2:TESS_lightcurve}, flare identification in subsection \ref{subsec2:Flareidentification}, flare models in \ref{subsec2:model}, flare quality checks in \ref{subsec2:qualitychecks}, and measurement of stellar rotaiton periods in \ref{subsec:prot}.
 
+\subsection{Sample Selection}\label{subsec2:sample}
 
+In this paper, we select a sample of stars that have $<300$ Myr ages based on their affiliation with nearby young moving group, clusters and associations. This provides an independant constraint on the age, which is more robust than only using the rotational periods. Moreover, we select stars that have been observed with TESS with 2-minute cadence. With these criteria, we obtain light curves for a sample of 3,163 young stars in total.
 
-We aim to measure the evolution in flare rates as a function of stellar age for
-stars with $1 \leq t_\textrm{age} \leq 250$\,Myr. We used the MOCA Data Base
+With these stars selected, we then run the convolutional neural network, \texttt{stella}, on each light curve to identify stellar flares \citep{stella_joss}. In order to model the flare profile, we employ the analytical  model developed by \cite{tovar22}. This model is able to simultaneously (i) fit the flares and  (ii) measure the equivalent duration and energy associated with each flare.
+
+A primary goal of this paper is to  measure the evolution of the stellar flare rate and its dependance on the stellar age. Particularly, we are interested in this dependancy for
+stars with ages $1 \leq t_\textrm{age} \leq 250$\,Myr. To this end, we used the MOCA Data Base
 (Gagné et al. in prep.) to identify nearby young moving groups, associations,
-and open clusters with known ages which satisfied our criteria. We identified
-unique 26~groups from which we created our sample list. We considered all targets
-that are either bona fide members, high-likelihood candidate members, or candidate members.
-This resulted in a catalog of 30,889 stars across 26 associations. We summarize
-the sample and quote adopted ages for each association
+and open clusters with known ages which satisfied our criteria. From this database we identified
+ 26~ unique groups from which we created our  sample of stars. The final selected targets were required to be: (i) confirmed members, (ii) high-likelihood candidate members, or (iii) candidate members. These rather stringent cuts resulted in a
+ catalog of 30,889 stars across 26 associations. We summarize
+the sample and   ages for each association (and therefore star)
 in Table~\ref{tab:sample}.
 
 \begin{deluxetable}{l r r r r r}[!ht]
@@ -64,100 +70,92 @@ Stars per Group \label{tab:sample}}
 \colhead{Ref.}
 }
 \startdata
-AB Doradus  &  133$_{-20}^{+15}$  &  81  & 1 \\
-Blanco 1 & 137.1$^{+7.0}_{-33}$ & 301 & 8\\
-Carina  &  45  & 91  & 2\\
-Carina-Musca & 32 & 22 & 5\\
-Chamaeleon  &  5  &  366  & 3 \\
-Columba  &  42  &  126  & 2\\
-Greater Taurus Subgroup 5 & 8.5 & 56 & 5\\
-Greater Taurus Subgroup 8 & 4.5 & 114 & 5\\
-Lower Centaurus Crux &  15  & 590  & 4\\
-MELANGE-1 & 250$_{-70}^{+50}$ & 22 & 10\\
-Octans  &  35$\pm 5$ &   98  & 6 \\
-Pisces Eridanis  &  120  &   176  & 7 \\
-Pleiades & 127.4$^{+6.3}_{-10}$ & 1304 & 8\\
-$\alpha$ Persei  &  79$_{-2.3}^{+1.5}$  &  467  & 8 \\
-IC 2602 corona &  52.5$_{-3.7}^{+2.2}$  & 10  & 8 \\
-IC 2602 system &  52.5$_{-3.7}^{+2.2}$  & 138  & 8 \\
-NGC 2451A & 48.5 & 44 & 5\\
-Oh 59 & 162.2 & 50 & 9\\
-Platais 9 & 50 & 99 & 11\\
-RSG2 & 126 & 87 & 12\\
-Theia 301  &  195  &  372  & 9\\
-Theia 95  &  30.2  &  191  & 9\\
-TW Hydrae  &  10  &  24  & 2\\
-Upper Centaurus  Lupus &  16  &  464  & 4 \\
-Upper Scorpius  &  10  &  80  & 4 \\
-Vela-CG4  &  33.7  &  352  & 5
+AB Doradus  &  133$_{-20}^{+15}$  &  88  & 1 \\
+Blanco 1 & 137.1$^{+7.0}_{-33}$ & 428 & 2\\
+Carina  &  45  & 94  & 3\\
+Carina-Musca & 32 & 35 & 4\\
+Chamaeleon  &  5  &  424  & 5 \\
+Columba  &  42  &  126  & 3\\
+Greater Taurus Subgroup 5 & 8.5 & 56 & 4\\
+Greater Taurus Subgroup 8 & 4.5 & 122 & 4\\
+Lower Centaurus Crux & 15 & 761 & 6\\
+MELANGE-1 & 250$_{-70}^{+50}$ & 19 & 7\\
+Octans  &  35$\pm 5$ &   64  & 8 \\
+Pisces Eridanis  &  120  &   219  & 9 \\
+Pleiades & 127.4$^{+6.3}_{-10}$ & 1421 & 2\\
+$\alpha$ Persei  &  79$_{-2.3}^{+1.5}$  &  625 & 2 \\
+IC 2602 system &  52.5$_{-3.7}^{+2.2}$  & 160 & 2 \\
+NGC 2451A & 48.5 & 59 & 4\\
+Oh 59 & 162.2 & 62 & 10\\
+Platais 9 & 50 & 124 & 11\\
+RSG2 & 126 & 145 & 12\\
+Theia 301  &  195  &  437 & 10\\
+Theia 95  &  30.2  &  230 & 10\\
+TW Hydrae  &  10  &  24  & 3\\
+Upper Centaurus Lupus & 16 $\pm$ 2 & 696 & 6\\
+Upper Scorpius  &  10  &  106  &  6\\
+Vela-CG4  &  33.7  &  299  & 4\\
+\hline
+Total & & 6,824\\
 \enddata
-\tablecomments{Age references: (1) \citet{gagne18_abdmg}; (2) \citet{Bell15};
-(3) \citet{luhman07}; (4) \citet{pecaut16}; (5) \citet{kerr21};
-(6) \citet{murphy15}; (7) \citet{curtis19}; (8) \citet{galindo22};
-(9) \citet{kounkel20}; (10) \citet{tofflemire21}; (11) \citet{tarricq21};
-(12) \citet{roser16}; }
+\tablecomments{Age references: (1) \citet{gagne18_abdmg}; (2) \citet{galindo22}; (3) \citet{Bell15}; (4) \citet{kerr21}; (5) \citet{luhman07}; (6) \citet{pecaut16}; (7) \citet{tofflemire21}; (8) \citet{murphy15}; (9) \citet{curtis19}; (10) \citet{kounkel20}; (11) \citet{tarricq21}; (12) \citet{roser16}}
 \end{deluxetable}
 
-\subsection{TESS Light Curves}
+\subsection{TESS Light Curves}\label{subsec2:TESS_lightcurve}
 
-To ensure we were able to resolve and accurately measure the energies of flares
-on these stars \citep{howard22}, we used the 2-minute data from the TESS mission.
+As described in the previous subsection, we only select stars in our sample for which TESS light curves have been obtained with 2-minute cadance. The reason for doing this is so that we are able to resolve and accure accurately measure the energies of flares for each of these stars \citep{howard22}.
 We crossmatched our sample with the TESS Input Catalog (TIC) based on their RA and Dec.
-We considered a star to be in the catalog if the distance between the target and
-the nearest TIC was within $1"$. This resulted in a final sample of 5,725 unique targets
-which have been observed at 2-minute cadence between Sector 1 and Sector 67, the
-latest available sector upon this analysis. Given the proximity of many targets towards the
-northern and southern ecliptic poles (Figure~\ref{fig:sample}), many targets were observed
-over multiple sectors. We downloaded all available data, yielding a total of 17,964
-light curves.
+In order for a star to be considered as a member of the catalog, , we required that  the distance between the target and
+the nearest TIC was within $<1"$.
+
+
+This process provided  a final sample of 5,725 unique targets. These targets have each been observed at a 2-minute cadence between TESS Sector 1 and Sector 67. These are the latest available sectors at the time that this analysis was performed. In Figure ~\ref{fig:sample}, we show the distribution of the on sky positions of the final sample.  It is evident that  many targets exhibit strong tendency for proximitry towards the
+northern and southern ecliptic poles (Figure~\ref{fig:sample}). Therefore, many  of these targets were observed
+over multiple sectors all of which observed the ecliptic poles. The entirety of the available data yielded  a total of 17,964
+light curves, an average of $\sim 3$ light curves per target (although with significant spread across targets).
 
 \begin{figure}[ht!]
-    \script{sample.py}
+    %\script{sample.py}
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/sample.pdf}
         \caption{
-            Distribution of our selected sample across the sky and colored by the
-            adopted age of the association (see Table~\ref{tab:sample}). The all-sky
-            coverage by TESS has unlocked new populations of stars to observe.
-            We take advantage of this observing strategy to measure flare rates
-            across 26 different nearby young moving groups, clusters, and associations.
+            Top: Distribution of our selected sample across the sky and colored by the adopted age of the association (see Table~\ref{tab:sample}). The all-sky coverage by TESS has unlocked new populations of stars to observe. We take advantage of this observing strategy to measure flare rates across 26 different nearby young moving groups, clusters, and associations. Bottom: Distribution of adopted effective temperatures, $T_\textrm{eff}$ [K] for stars in our sample. We include all stars with $T_\textrm{eff} \leq 6000$\,K.
         }
         \label{fig:sample}
     \end{centering}
 \end{figure}
 
 
-\subsection{Flare Identification}
+\subsection{Flare Identification}\label{subsec2:Flareidentification}
 
-We followed the machine learning flare-identification methods presented in
-\cite{feinstein20a}. This method relies on the fact that all flare events
-have similar time-dependent morphologies generally described as a sharp rise
-and an exponential decay. This method uses a convolutional neural network (CNN),
-\texttt{stella} \citep{feinstein20}, trained on by-eye validated flare events from
-TESS Sectors 1 and 2 to identify flare events in TESS 2-minute data
-\citep{guenther19_flares, feinstein20a}. The benefits of the CNN is that it is
-insensitive to the stellar baseline, since it is trained to look only for the
-flare morphology. This means that the peaks of rotational modulation driven by
-stellar heterogeneities, which is readily seen in the light curves of young stars,
-are not accidentally identified as flares. In this way, we are able to
-build a sample of flares which is unbiased towards low-amplitude/low-energy flares,
-which are often not identified in traditional sigma-outlier identification
+Once we had the lightcurves for each target, we performed the following procedur to identify stellar flares. First, we implemented the machine learning flare-identification methods presented and described in
+\cite{feinstein20}. This method relies on the fact that all flare events
+have similar time-dependent morphologies. These flare-profiles can generally be described as a sharp rise followed by
+ an exponential decay in the white light curve. The identification-technique implements  a convolutional neural network (CNN),
+\texttt{stella} \citep{feinstein20}. The neural network was trained to identify flare events in TESS 2-minute data using a catalogue of flare events from
+TESS Sectors 1 and 2 that were validated  by-eye
+\citep{guenther19_flares}.
+
+There are many benefits to using the CNN for stellar flare identification. Primarily, the CNN is advantageous because it is insensitive to the stellar baseline flux. This feature inherently stems from the fact that the network is trained to search \textit{only} based on flare morphology. It is therefore relatively insensitive to the absolute flux levels, so long as the inherent noise does not overwhelm the signal itself. One advantage of this is that rotational modulation peaks --- which are themselves  driven by
+stellar heterogeneities ---
+are not accidentally identified as flares. This is especially advantageous for our sample of young stars, which  readily exhibit rotational modulatioin and associated peaks  in their light curves.
+
+Based on these advantages, the final compiled sample of flares is \textit{unbiased} towards low-amplitude/low-energy flares. It is important to note that these low-energy events are typically  not identified in traditional sigma-outlier identification
 methods \citep{chang15}.
 
-The \texttt{stella} CNN models take the light curve (time, flux, flux error)
+The \texttt{stella} CNN models calculates the probability that a data point in a light curve is associated with a flaring event. Specifically, it taakes the light curve (time, flux, flux error)
 as an input and returns an array with values of [0,1], which are treated as
-the probability a data point is (1) or is not (0) part of a flare. We ran all
-light curves through 10 \texttt{stella} models and averaged the output, taking
-this as the final prediction per observation. The \texttt{stella} code uses the
-predictions per data point to group together points, identifying those as single
-flare events. It then calculates the probability of the entire flare event as
-the average of the probabilities assigned to all the data points during the flare.
+the probability a data point is (1) or is not (0) part of a flare. We ran every
+light curve through 10 independant \texttt{stella} models to ensure that our statistics were accurate. We then averaged the output probabilities for each 10 model runs to be the final prediction per observation.
+
+In order to identify a single flare event, the \texttt{stella} code uses the
+predictions per data point to group together points. We modified this stage of identification slightly from the original flare-identification method. Specifically, we identified all data points with a probability of being associated with a flare of $P > 0.75$. Any data points that were within 4 cadences of each other were considered to be a single flare event. We did not consider any potential flares that had three or fewer points with $P > 0.75$. This was motivated by the fact that  sometimes a single-point outlier is assigned a high probability of being a flare. Therefore, we simply neglected these events. We assigned the probability of the whole flare event as the probability of the peak data point.
 
 
 \begin{figure}[ht!]
-    \script{flare_distribution.py}
+    %\script{flare_distribution.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/flare_distribution.pdf}
+        \includegraphics[width=0.9\linewidth]{figures/flare_distribution.pdf}
         \caption{
             High level summary of the demographics of flares in our sample. Top:
             The number of flares identified compared to the number of stars in
@@ -173,68 +171,66 @@ the average of the probabilities assigned to all the data points during the flar
 \end{figure}
 
 
-\subsubsection{Modeling Flare Properties}
+\subsection{Modeling Flare Properties}\label{subsec2:model}
 
-We used the analytical flare model in
-\cite{tovar22}\footnote{\url{https://github.com/lupitatovar/Llamaradas-Estelares}}
-to fit the flares in our sample. This model builds upon the model presented
-in \cite{davenport14}, and includes a convolution of a Gaussian with a
-double exponential model. The analytical model accounts for the amplitude,
-heating timescale, rapid cooling phase timescale, and slow cooling phase
-timescale of flares. Using this model, we used a non-linear least squares
+As described in the previous subsection, flares are well-described in light curves as a sudden increase in flux followed by an exponential decay. For this paper, we used the analytical flare model,Llamaradas Estelares which was  presented in
+\cite{tovar22}\footnote{\url{https://github.com/lupitatovar/Llamaradas-Estelares}}. We used these models to fit the flares and extract the flare parameters in all of the light curves of our sample. This model builds upon the model presented
+in \cite{davenport14}. Specifically, it includes the convolution of a Gaussian with a
+double exponential model in the flare profile.
+
+The analytical model is robust in that it is able to accounts for multiple inherent features of flares. Specifically, it can incorporate the flare (i) amplitude,
+ (ii) heating timescale, (iii) rapid cooling phase timescale, and (iv) slow cooling phase
+timescale . We implemented a nonlinear least squares
 optimization to fit for the time of the flare peak ($t_\textrm{peak}$),
-full width at half maximum (FWHM), and the amplitude ($A$), of each flare
-in the sample. We combine the model with a second-order polynomial fit to
-a 10-hour baseline before and after the flare to account for any rotational
-modulation.
+full width at half maximum (FWHM), and the amplitude ($A$) of each flare
+in the sample.  We combine the model with a second-order polynomial fit to
+a 1.2-hour baseline before and after the flare  during only the fitting stage. This was implemented in order to account for any rotational modulation, and therefore  was particularly relevant for the rapid rotators.
 
 
-\subsubsection{Flare Quality Checks}
+We calculated the equivalent duration, ED, of the flare by performing a numerical integration  of the flare flux with respect to time. We calculate the flare energy, $E_\textrm{flare}$, using,
 
-The \texttt{stella} CNNs were initially trained on data from TESS Sectors 1 and 2.
-Because the noise properties from sector to sector varies, the CNNs are unable to accurately
-capture all of these changes. Additionally, the CNNs were trained on a sample of \textcolor{red}{n}
-stars, which does not necessarily encapsulate all types of variable stars or a sufficient distribution
-of variable stars (e.g., eclipsing binaries and RR Lyraes). As such, we apply the additional
-quality checks presented in \cite{Feinstein22} to ensure our flare sample has little to no contamination
-from other sources. We remove flares which satisfy the one or more of the following criteria:
+\begin{equation}\label{eq:Eflare}
+    E_\textrm{flare} = L_\star \, A \, \textrm{ED} \, s \, .
+\end{equation}
+In equation \ref{eq:Eflare}, $L_\star$ is the luminosity of the star and $s$ is a scaling factor defined as $s = B_\lambda(T_\textrm{eff}) / B_\lambda(T_\textrm{flare})$, where $B_\lambda(T)$ is the Planck function. We assume that the flare temperature is 9000~K \citep{}.
 
+\subsection{Flare Quality Checks}\label{subsec2:qualitychecks}
+
+In this subsection, we describe the methodology we employ to ensure that flares identified by the CNN are high quality. The \texttt{stella} CNNs were trained on data from TESS Sectors 1 and 2. However, the noise properties are variable aross sectors in TESS data. The CNNs are therefore unable to accurately
+account for and capture  this variation when operating on different sectors. Moreover, the original CNNs were only trained on a sample of 1,228 stars. This sample  does not necessarily encapsulate all or even a sufficient distribution  of variable stars types, such as eclipsing binaries, RR Lyraes, and fast rotators with rotation periods $P_\textrm{rot} < 1$~day. We  therefore apply  additional
+quality checks to ensure our flare sample has little to no contamination
+from other sources.
+
+Specifically, we remove flares from our sample which did not satisfy  one or more of the following criteria.
 \begin{enumerate}
-  \item The amplitude of the flare must be $> 0.01$, or 1\%. This follows the limits set by
-        \cite{feinstein20}.
-  \item The amplitude of the flare (A) must be greater than $1.5\times$CDPP \citep[Combined Differential
-        Photometric Precision;][]{christiansen12}, similar to \cite{Feinstein22}.
-  \item For flares originating from stars with $T_\textrm{eff} > 5000$, the amplitude of the flare
-        must be greater than $12\times$CDPP. This is because the most massive stars tended to have
-        much larger scatter in the TESS noise.
-  \item The fitted equivalent duration (ED) must be positive $\textrm{ED} > 0$.
-  \item The fitted full-width half-maximum (FHWM) and A must be $> 0$.
-  \item The error on the A must be $\sigma_A < A$. This removed poorly constrained flares and often
-        flares which were buried in the TESS noise.
+    \item  The amplitude of the flare must be $> 0.01$, or 1\%. This follows the limits set by \cite{feinstein20}.
+    \item The flare amplitude  must be at least twice the standard deviation of the light curve 30 minutes before and 45 minutes after the flare. This ensures that the feature is not a sharp noise artifact.
+    \item  The fitted flare model parameters must be physically motivated: FWHM $> 0$; $A > 0$; ED $> 0$.
+    \item The flare parameters   must be $\sigma_A < 0.5$ and $\sigma_{t_\textrm{peak}} < 0.01$.
 \end{enumerate}
+We find that when the errors on the first criteria are larger than the cut-offs, the flares are often simply  mischaracterized noise.
 
-We choose to include flares with a probability $P \geq 75\%$ of being
-a true flare. After these checks, we have a flare sample of 28,822~flares originating
-from 3,979 stars (Figure~\ref{fig:flare_distribution}). 83.8\% of the flares have
-probabilities of $P \geq 90\%$ of being true; 65.0\% of the flares have probabilities
-of $P \geq 99\%$ of being true.
+As a final check, we performed an exhaustive by-eye verification of flares from light curves for stars with flare rates, $\mathcal{R} > 1$~day$^{-1}$. These stars  generally tend to have $T_\textrm{eff} > 5000$~K and TESS magnitudes $< 8$.  Therefore, their light curves are dominated by sharp noisewhich \texttt{stella} often mischaracterizes as flares.
+
+As a final cut, the sample only includes events that have  a probability $P \geq 90\%$ of being
+a true flare. After performing these additional checks, we obtain a final flare sample of \textcolor{red}{n}~flares originating from \textcolor{red}{n} stars (Figure~\ref{fig:flare_distribution}). \textcolor{red}{n}\% of the flares have probabilities of $P \geq 90\%$ of being true; \textcolor{red}{n}\% of the flares have probabilities of $P \geq 99\%$ of being true.
 
 \subsection{Measuring Rotation Periods}\label{subsec:prot}
+In this paper we have two  primary goals. The first is to improve our understanding of flare statistics across
+ ages for young stars. \citet{seligman22} demonstrated that stars with low Rossby numbers $R_0 < 0.13$ exhibit
+shallower flare frequency distribution slopes. These shallower slopes are caused by  an excess of  high energy flares compared to lower energy flares
+originating from these sources.  In addition to improving flare statistics, we  aim to expand the sample for which flare frequency slope and  rossby number (from $P_\textrm{rot}$) have been measured.
 
-\cite{seligman22} demonstrated that stars with low Rossby numbers $R_0 < 0.13$ have
-shallower flare frequency distribution slopes, indicative of more high energy flares
-originating from these sources. In addition to understanding flare statistics across
-young ages, we aim to expand this sample by measuring the rotation periods, $P_\textrm{rot}$,
-for the stars in our sample. To do this, we used \texttt{michael}\footnote{\url{https://github.com/ojhall94/michael}},
-an open-source Python package that robustly measures $P_\textrm{rot}$ using a combination
+In order to perform this, we describe how we measure stellar rotation periods from the TESS light curves. To this end we used \texttt{michael}\footnote{\url{https://github.com/ojhall94/michael}}
+which is an open-source Python package that robustly measures $P_\textrm{rot}$ using a combination
 traditional Lomb-Scargle periodograms and wavelet transformations (Hall et al. submitted).
 \texttt{michael} measures $P_\textrm{rot}$ using the \texttt{eleanor} package, which
 extracts light curves from the TESS Full-Frame Images \citep[FFIs;][]{feinstein19}.
-We ran \texttt{michael} on all stars from which flares were identified. The estimated
-$P_\textrm{rot}$ were vetted by-eye, from the \texttt{michael} diagnostic plots. In
-total, we robustly measured 1,269 $P_\textrm{rot}$ across our sample of
-3,983 stars, which is $\sim 50\%$.
 
+
+We ran \texttt{michael} on all stars in our samples from which flares were identified. The estimated
+rotational periods were subsequently vetted by-eye  with the \texttt{michael} diagnostic plots. This vetting was implemented to ensure that the measured $P_\textrm{rot}$ was not a harmonic of the true $P_\textrm{rot}$. In
+total, we robustly measured rotation periods for 1,847 stars.
 
 \section{Results}\label{sec:results}
 
