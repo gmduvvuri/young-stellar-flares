@@ -27,7 +27,7 @@ path = os.path.join(data_dir, 'mcmc_fits/best_fits')
 fits = np.sort([os.path.join(path, i) for i in os.listdir(path)])
 
 # Initialize the figure
-fig, ax = plt.subplots(figsize=(14,5))
+fig, ax = plt.subplots(figsize=(10,3))
 
 norm = matplotlib.colors.Normalize(vmin=temp_ranges[0][0],
                                    vmax=temp_ranges[-1][1])
@@ -60,7 +60,7 @@ for i, fn in enumerate(fits):
                  xerr=[ages[:,1][q], ages[:,2][q]],
                  yerr=[dat[0][:,1][q], dat[0][:,2][q]],
                  marker='o', linestyle='', color=hexnum,
-                 label=label, zorder=-i)
+                 label=label+'K', zorder=-i)
 
 #####################################
 # Plot data from Ilin et al. (2020) #
@@ -72,7 +72,8 @@ plt.errorbar(695, np.nanmedian(hyades_slopes),
              color='k', marker=imarker)
 
 pleiades_slopes = -np.array([2.13, 2.06, 2.06, 1.99, 2.32, 1.92, 1.91]) + 1
-plt.errorbar(127.4, np.nanmedian(pleiades_slopes),
+plt.errorbar(127.4,
+             np.nanmedian(pleiades_slopes),
              xerr=8, yerr=np.nanstd(pleiades_slopes),
              color='k', marker=imarker)
 
@@ -90,13 +91,13 @@ plt.errorbar(np.full(5, 2000),
              color='w', marker='o', linestyle='', label='Feinstein et al. (2022)')
 
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
-           ncol=3, mode="expand", borderaxespad=0.,
-           markerscale=2)
+           ncol=4, mode="expand", borderaxespad=0.,
+           markerscale=2, fontsize=12)
 
 plt.xscale('log')
 plt.ylim(-1.8, 0.0)
-plt.xlabel('Age [Myr]', fontsize=24)
-plt.ylabel('Flare Frequency\nDistribution Slope, ' + r'$\alpha$', fontsize=24)
+plt.xlabel('Age [Myr]', fontsize=20)
+plt.ylabel('Flare Frequency\nDistribution Slope, ' + r'$\alpha$', fontsize=20)
 
 ax.set_rasterized(True)
 

@@ -97,7 +97,7 @@ ax2.set_xlabel(r'log$_{10}$(Flare Energy [erg])')
 ax2.set_ylabel(r'log$_{10}$(ED [sec])')
 
 for ax in [ax2]:#, ax1]:
-    ax.set_xlim(27,35)
+    ax.set_xlim(27 ,35)
     ax.set_ylim(-1.65,4.2)
 
 ax0.set_rasterized(True)

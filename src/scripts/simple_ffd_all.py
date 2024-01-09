@@ -13,7 +13,7 @@ pwd2 = os.path.join(data_dir, 'mcmc_fits/fitted_data')
 sample_files = np.sort([os.path.join(pwd1, i) for i in os.listdir(pwd1)])
 data_files = np.sort([os.path.join(pwd2, i) for i in os.listdir(pwd2)])
 sample_sizes = np.load(os.path.join(data_dir,
-                                    'mcmc_fits/mcmc_sample_sizes_v4.npy'),
+                                    'mcmc_fits/mcmc_sample_sizes_v6.npy'),
                        allow_pickle=True).item()
 
 ## Setup the figure ##
