@@ -41,8 +41,6 @@
 \affiliation{Department of Astrophysical and Planetary Sciences, University of Colorado, UCB 389, Boulder, CO 80309, USA}
 \affiliation{National Solar Observatory, University of Colorado Boulder, 3665 Discovery Drive, Boulder CO 80303, USA}
 
-\correspondingauthor{Adina~D.~Feinstein;\\ \twitter{afeinstein20}; \github{afeinstein20}} \email{adina.feinstein@lasp.colorado.edu}
-
 
 % Abstract with filler text
 \begin{abstract}
@@ -502,7 +500,7 @@ reproducible publications. ADF acknowledges funding from ...
 
 \section{Supplemental Material}\label{appendix:supp_ffds}
 
-Miscellaneous figures and such that people might want but I don't need to show
+Here, we present all of our best-fit slopes and intercepts for various flare-frequency distributions (FFDs) fit throughout this work. We include our fits outlined in Sections~\ref{subsec:energy_ffd}. We present the FFDs as a function of energy in Figure~\ref{fig:simple_ffd_all}. We show 100 random draws from our MCMC fitting to these distributions as orange lines. We fit each distribution with $E > 10^{29}$\,erg, which roughly represents the turnover in each distribution. We do not fit the slope for $T_\textrm{eff} = [3850 - 4440]$~K at 20 -- 40~Myr due to our limited sample size (6 stars in total).
 
 \begin{figure*}[ht!]
     \script{simple_ffd_all.py}
@@ -523,6 +521,55 @@ Miscellaneous figures and such that people might want but I don't need to show
     \end{centering}
 \end{figure*}
 
+\begin{deluxetable*}{l | r | r r r r r r }[!ht]
+\tabletypesize{\footnotesize}
+\tablecaption{Best-fit slope and normalization parameters for stars of different temperatures and ages\label{tab:best_fits}}
+\tablehead{
+\colhead{$T_\textrm{eff}$ [K]} & \colhead{Age [Myr]} & \colhead{$\alpha_\textrm{E}$} & \colhead{$\sigma_{\alpha_\textrm{E}}$} & \colhead{$\beta_\textrm{E}$} & \colhead{$\sigma_{\beta_\textrm{E}}$} &  \colhead{$n_\textrm{E, fit}$} & \colhead{$N_\textrm{E}$} %& \colhead{$\alpha_\textrm{T}$} & \colhead{$\sigma_{\alpha_\textrm{T}}$} & \colhead{$A_*$} & \colhead{$\sigma_{A_*}$} &  \colhead{$n_\textrm{T, tot}$} & \colhead{$n_\textrm{T, fit}$} & \colhead{$N_\textrm{T}$}
+}
+\startdata
+2300 -- 3400 & 4 -- 10  &  -0.516  &  0.074  &  14.514  &  2.409  &  731  &  96 \\
+& 10 -- 20  &  -0.336  &  0.031  &  8.296  &  0.973  &  1183  &  166 \\
+& 20 -- 40  &  -0.499  &  0.058  &  13.564  &  1.858  &  526  &  75 \\
+& 40 -- 50  &  -0.397  &  0.045  &  10.248  &  1.400  &  3358  &  111 \\
+& 70 -- 80  &  -0.383  &  0.083  &  10.244  &  2.685  &  341  &  102 \\
+& 120 -- 150  &  -0.657  &  0.097  &  18.757  &  3.161  &  3797  &  615 \\
+& 150 -- 300  &  -0.341  &  0.063  &  8.799  &  2.029  &  295  &  60 \\
+\hline
+3400 -- 3850  & 4 -- 10  &  -0.206  &  0.025  &  4.536  &  0.821  &  397  &  44 \\
+& 10 -- 20  &  -0.345  &  0.038  &  8.768  &  1.199  &  474  &  43 \\
+& 20 -- 40  &  -0.405  &  0.054  &  10.890  &  1.741  &  194  &  17 \\
+& 40 -- 50  &  -0.408  &  0.037  &  10.770  &  1.182  &  1420  &  43 \\
+& 70 -- 80  &  -0.432  &  0.075  &  11.893  &  2.471  &  291  &  77 \\
+& 120 -- 150  &  -0.525  &  0.062  &  14.557  &  1.998  &  1185  &  167 \\
+& 150 -- 300  &  -0.339  &  0.058  &  8.683  &  1.904  &  262  &  56 \\
+\hline
+3850 -- 4440  & 4 -- 10  &  -0.221  &  0.040  &  4.884  &  1.314  &  207  &  34 \\
+& 10 -- 20  &  -0.350  &  0.016  &  8.998  &  0.545  &  480  &  65 \\
+& 20 -- 40  &  -0.202  &  0.077  &  4.425  &  2.492  &  51  &  6 \\
+& 40 -- 50  &  -0.379  &  0.062  &  9.873  &  1.982  &  175  &  11 \\
+& 70 -- 80  &  -0.455  &  0.102  &  12.498  &  3.347  &  63  &  25 \\
+& 120 -- 150  &  -0.419  &  0.046  &  11.010  &  1.494  &  684  &  116 \\
+& 150 -- 300  &  -0.323  &  0.029  &  8.026  &  0.929  &  247  &  39 \\
+\hline
+4440 -- 5270  & 4 -- 10  &  -0.348  &  0.031  &  8.850  &  1.014  &  112  &  25 \\
+& 10 -- 20  &  -0.408  &  0.043  &  10.914  &  1.417  &  558  &  111 \\
+& 20 -- 40  &  -0.440  &  0.033  &  11.635  &  1.075  &  250  &  29 \\
+& 40 -- 50  &  -0.331  &  0.089  &  8.325  &  2.893  &  202  &  30 \\
+& 70 -- 80  &  -0.390  &  0.085  &  10.152  &  2.749  &  122  &  37 \\
+& 120 -- 150  &  -0.375  &  0.029  &  9.593  &  0.930  &  572  &  111 \\
+& 150 -- 300  &  -0.560  &  0.126  &  15.056  &  3.951  &  115  &  35 \\
+\hline
+5270 -- 5930  &  4 -- 10  &  -0.271  &  0.049  &  6.280  &  1.586  &  166  &  44 \\
+& 10 -- 20  &  -0.419  &  0.055  &  11.266  &  1.820  &  195  &  67 \\
+& 20 -- 40  &  -0.465  &  0.035  &  12.377  &  1.149  &  636  &  58 \\
+& 40 -- 50  &  -0.479  &  0.054  &  13.071  &  1.780  &  347  &  36 \\
+& 70 -- 80  &  -0.337  &  0.083  &  8.416  &  2.656  &  57  &  27 \\
+& 120 -- 150  &  -0.450  &  0.045  &  11.977  &  1.460  &  236  &  62 \\
+& 150 -- 300  &  -0.305  &  0.081  &  6.826  &  2.598  &  64  &  22 \\
+\enddata
+\tablecomments{$n_\textrm{E, fit}$ is the number of flares fit per bin; $N_E$ is the number of stars in each bin.}
+\end{deluxetable*}
 
 \bibliography{bib}
 

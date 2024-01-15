@@ -130,7 +130,7 @@ def fit_ffd(data, limit, yerr=None):
                            p0=[-0.8, 22],
                            bounds=([-2.0, -50.0],
                                    [0.0, 50.0]),
-                           maxfev=10000)
+                           maxfev=1000000)
     perr = np.sqrt(np.diag(pcov))
 
     data = np.array([logx, logn, np.sqrt(n[mask])])
