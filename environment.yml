@@ -6,6 +6,7 @@ dependencies:
   - pip:
       - matplotlib
       - astropy
+      - altaipony
       - scipy
       - mpmath
       - showyourwork==0.4.2
