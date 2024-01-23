@@ -46,18 +46,26 @@
 % Abstract with filler text
 \begin{abstract}
 
-Stellar flares are short-duration ($<$\,hours) bursts of radiation associated with surface magnetic reconnection events. Stellar magnetic activity generally decreases as a
-function of both age and Rossby number, $R_0$, a measure of the relative importance of the convective and rotational dynamos.  Young stars ($<300$ Myr) have typically been
-overlooked in population-level flare studies because of the lack of long baseline observations and challenges with flare-detection methods. Here, we select a sample of stars
-that are members of 26 nearby  moving groups, clusters, or associations with ages $<$300~Myr  that have been observed by the Transiting Exoplanet Survey Satellite (TESS) at
-2-minute cadence.  With this sample of \nstars\ stars, we identified \nflares\ flares originating from \nflarestars\ stars. Moreover, we robustly measured the rotation periods
-of \nprot~stars within this population. We measure the flare frequency distribution (FFD) slope as a function of both age and spectral type and find the FFD slope, $\alpha$,
-saturates for all spectral types at $\alpha \sim -0.5$ and is constant over the 300~Myr. Additionally, we find that flare rates for stars $t_\textrm{age} = 50 - 250$~Myr are
-saturated below $R_0 < 0.14$, which is consistent with other indicators of magnetic activity. Taking advantage of the long temporal baseline of TESS, we search for evidence
-of annual flare rate variability. We present eleven young stars which tentatively show evidence of flare rate variations across five years of TESS data, potentially correlated
-with long term stellar activity cycles. Additionally, we cross match our entire sample  with \textit{GALEX} and find no correlation between flare rate and Far- and Near-Ultraviolet
-flux. Finally, we find the flare rates of planet hosting stars are relatively lower than a  comparable, larger samples of stars. This trend may have ramifications for the atmospheric
-evolution of young, short-period exoplanets.
+Stellar flares are short-duration ($<$\,hours) bursts of radiation associated with surface magnetic reconnection events.
+Stellar magnetic activity generally decreases as a
+function of both age and Rossby number, $R_0$, a measure of the relative importance of the convective and
+rotational dynamos.  Young stars ($<300$ Myr) have typically been
+overlooked in population-level flare studies due to challenges with
+flare-detection methods. Here, we select a sample of stars
+that are members of 26 nearby  moving groups, clusters, or associations with ages $<$300~Myr  that have been observed
+by the Transiting Exoplanet Survey Satellite (TESS) at
+2-minute cadence.  We identified \nflares\ flares originating from \nflarestars\
+stars and robustly measure the rotation periods of \nprot~stars. We measure and find the flare frequency
+distribution (FFD) slope, $\alpha$,
+saturates for all spectral types at $\alpha \sim -0.5$ and is constant over 300~Myr. Additionally, we find that
+flare rates for stars $t_\textrm{age} = 50 - 250$~Myr are
+saturated below $R_0 < 0.14$, which is consistent with other indicators of magnetic activity. We find evidence
+of annual flare rate variability in eleven stars, potentially correlated with long term stellar activity cycles.
+Additionally, we cross match our entire sample  with \textit{GALEX} and find no
+correlation between flare rate and Far- and Near-Ultraviolet flux.
+Finally, we find the flare rates of planet hosting stars are relatively lower than comparable, larger samples
+of stars, which may have ramifications for the atmospheric
+evolution of short-period exoplanets.
 
 \end{abstract}
 
@@ -263,7 +271,8 @@ the Planck function. We assume that the flare temperature is 9000~K \citep{hawle
 
 The \texttt{stella} CNNs were trained on data from TESS Sectors 1 and 2. However, the noise properties are variable across sectors in TESS data. The CNNs are therefore unable to
 accurately account for and capture  this variation when operating on different sectors. Moreover, the original CNNs were only trained on a sample of 1,228 stars. This training sample
-does not necessarily encapsulate a sufficient distribution  of variable stars types, such as eclipsing binaries, RR Lyraes, and fast rotators with $P_\textrm{rot} < 1$~day, which
+does not necessarily encapsulate a sufficient distribution  of variable stars types, such as eclipsing binaries, RR Lyraes, and fast
+rotators with $P_\textrm{rot} < 1$~day \citep{lawson19}, which
 results in the CNNs not being able to properly distinguish these temporal features from flares. We therefore apply additional
 quality checks to ensure our flare sample has little to no contamination from other sources.
 
