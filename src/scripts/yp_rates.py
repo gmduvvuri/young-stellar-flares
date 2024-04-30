@@ -88,7 +88,7 @@ fig, axes = plt.subplots(nrows=2, figsize=(10,6),
                                gridspec_kw={'height_ratios':[1,2]})
 ax1, ax2 = axes.reshape(-1)
 
-fig.set_facecolor('w')
+fig.set_facecolor('k')
 
 # For the color bar only
 sc = ax1.scatter(np.arange(len(yp)), yp, c=teff, cmap=cmap, vmin=2300, vmax=5930, s=0)
