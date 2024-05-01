@@ -1,5 +1,5 @@
 % Define document class
-\documentclass[twocolumn, linenumbers]{aastex631}
+\documentclass[twocolumn]{aastex631}
 \usepackage{showyourwork}
 \usepackage{rsfso}
 \usepackage{rotating}
@@ -92,14 +92,14 @@ with FUV and NUV observations from \textit{GALEX} and place the flare rates of y
 hosting stars in the context of our broader sample.  We conclude in Section~\ref{sec:conclusions}.
 We provide additional figures and tables in Section~\ref{appendix:supp_ffds}.
 
-\textcolor{red}{This paper was written using the \textit{showyourwork!} open-source
-software package. The objective of \textit{showyourwork!} is to improve reproducibility
+This paper was written using the \textcolor{red}{\textit{showyourwork!}} open-source
+software package. The objective of \textcolor{red}{\textit{showyourwork!}} is to improve reproducibility
 and transparency of scientific research by compiling the manuscript and figures
 simultaneously. All of the data in this work is hosted on GitHub\footnote{The GitHub is
-hyperlinked in the \textit{showyourwork!} stamp at the top of the first page of this manuscript,
+hyperlinked in the \textcolor{red}{\textit{showyourwork!}} stamp at the top of the first page of this manuscript,
  and can also be found here: \url{https://github.com/afeinstein20/young-stellar-flares}.} and
  Zenodo.\footnote{} At the end of every caption figure in this manuscript, there is a GitHub icon
- (\faGithub), which links to the Python script used to create that figure.}
+ (\faGithub), which links to the Python script used to create that figure.
 
 \section{TESS Light Curve Characterization}\label{sec:methods}
 
@@ -185,9 +185,9 @@ over multiple TESS sectors. We use $T_\textrm{eff}$ as our stellar characterizat
 metric over the standard $M_\star$ because $\sim 600$ stars in our sample lack mass
 information in the TIC. The entirety of the available data yielded 17,964 light curves
 processed by the Science Processing Operations Center (SPOC) pipeline \citep{jenkins16},
-\textcolor{red}{which can be accessed on MAST under DOI  \href{http://dx.doi.org/10.17909/t9-nmc8-f686}{10.17909/t9-nmc8-f686}.}
+which can be accessed on MAST under DOI  \href{http://dx.doi.org/10.17909/t9-nmc8-f686}{10.17909/t9-nmc8-f686}.
 Our sample has an average of $\sim 3$ light curves per target (although with significant
-spread across targets). \textcolor{red}{We downloaded all light curves using \texttt{lightkurve}\footnote{\url{https://doi.org/10.5281/zenodo.4654522}}.}
+spread across targets). We downloaded all light curves using \texttt{lightkurve}\footnote{\url{https://doi.org/10.5281/zenodo.4654522}}.
 For our analysis, we used the SPOC-processed SAP\_FLUX.
 
 \begin{figure}[ht!]
@@ -213,8 +213,8 @@ This method relies on the similar time-dependent morphologies of all flare event
 These flare-profiles can generally be described as a sharp rise followed by an
 exponential decay in the white light curve. This identification-technique implements
 the convolutional neural network (CNN) \texttt{stella} \citep{feinstein20},
-\textcolor{red}{although other architectures have been explored for flare identification
-\citep[e.g.][]{vida18}.}  The CNN  was trained on a by-eye validated catalogue of flares
+although other architectures have been explored for flare identification
+\citep[e.g.][]{vida18}. The CNN  was trained on a by-eye validated catalogue of flares
 from TESS Sectors 1 and 2 with 2-minute data \citep{guenther19_flares}.
 
 There are several benefits to using the CNN for stellar flare identification. Primarily,
@@ -230,9 +230,9 @@ rotational modulation in their light curves.
 Based on these advantages, the final compiled sample of flares is unbiased towards
 low-amplitude/low-energy flares. It is important to note that these low-energy events
 are typically not identified in traditional sigma-outlier identification
-methods \textcolor{red}{\citep[e.g.][]{chang15, vasilyev22}}. \textcolor{red}{While
+methods \citep[e.g.][]{chang15, vasilyev22}. While
 significant developments have been achieved to better model and detrend stellar
-variability \citep[e.g.][]{bicz22}, these methods can be computationally intensive}
+variability \citep[e.g.][]{bicz22}, these methods can be computationally intensive
 The \texttt{stella} CNN models calculate the probability that a data point in a light
 curve is associated with a flaring event. Specifically, it takes the light curve (time,
 flux, flux error) as an input and returns an array with values of [0,1], which are
@@ -240,9 +240,9 @@ treated as the probability a data point is (1) or is not (0) part of a flare. We
 every light curve through 10 independent \texttt{stella} models and averaged the
 outputs to ensure that our statistics were accurate. We note that in this processing,
 the CNN ignores 200-minutes before and after any gaps in the data. Therefore, any
-flares which occur during these times are not identified. \textcolor{red}{From by-eye
+flares which occur during these times are not identified. From by-eye
 vetting of $\sim 300$ light curves, we found 2~flares within the first 200~minutes of
-the orbital gaps. Therefore, we estimate $\leq 120$~flares are missed in our catalog.}
+the orbital gaps. Therefore, we estimate $\leq 120$~flares are missed in our catalog.
 
 The \texttt{stella} code groups individual points with the predictions per data point
 when identifying a single flare event. We modified this stage of identification slightly
@@ -283,10 +283,10 @@ Specifically, it can incorporate the flare (i) amplitude, (ii) heating timescale
 (iii) rapid cooling phase timescale, and (iv) slow cooling phase timescale. We
 implemented a nonlinear least squares optimization to fit the flare peak time
 ($t_\textrm{peak}$), full width at half maximum (FWHM), and the amplitude ($A$)
-of each flare in the sample. \textcolor{red}{We note that there are several other
+of each flare in the sample. We note that there are several other
 physically-motivated flare models which could be used, such as those presented in
 \cite{gryciuk17, pietras22, yang23_lp}; these models include using two profiles to
-fit the impulsive and late phases of the flare.} We combine the model with a
+fit the impulsive and late phases of the flare. We combine the model with a
 second-order polynomial fit to a 1.2-hour baseline before and after the flare
 during only the fitting stage. This was implemented in order to account for any
 slope due to rotational modulation, and therefore was particularly relevant for the
@@ -305,14 +305,14 @@ where $B_\lambda(T)$ is the Planck function. We assume that the flare temperatur
 9000~K \citep{hawley92, hawley95}, although recent NUV flare observations suggest
 this may be an underestimation \citep{kowalski19, brasseur23, berger23}.
 
-\subsubsection{\textcolor{red}{Comparison of Flare Models}}
+\subsubsection{Comparison of Flare Models}
 
-\textcolor{red}{\cite{tovar22} demonstrated that the flare model works well for
+\cite{tovar22} demonstrated that the flare model works well for
 flares with amplitudes $\geq 2$ (i.e. double the baseline flux). However, other
 works such as \cite{pietras22} have demonstrated that a double-flare profile better
 fits high energy flares. To quantify how well the Llamaradas Estelares model works,
 we refit and calculate the $\chi^2$ for a subset of high amplitude flares ($A \geq 0.4$)
-using Equation 3 in \cite{pietras22}, a double-peak flare model, which is:}
+using Equation 3 in \cite{pietras22}, a double-peak flare model, which is:
 
 \begin{equation}\label{eqn:flare}
 \begin{split}
@@ -320,20 +320,20 @@ using Equation 3 in \cite{pietras22}, a double-peak flare model, which is:}
 \end{split}
 \end{equation}
 
-\textcolor{red}{where $A$ is is related to amplitude of the flare, $B$ relates
+where $A$ is is related to amplitude of the flare, $B$ relates
 to the total energy released during the flare, $C$ relates to the timescale of
 the flare, $D$ is related to the decay timescale, $\tau$ is the time of a given
 cadence, and $t$ is the time to integrate over. The subscripts 1 and 2 indicate
 which flare variables are associated with the first and second flare profile. We
 refit 900~high-amplitude flares following Equation~\ref{eqn:flare}. We plot the
-results of this refitting in Figure~\ref{fig:model_fit}.}
+results of this refitting in Figure~\ref{fig:model_fit}.
 
 \begin{figure}[ht!]
     \script{model_fit.py}
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/model_fit.pdf}
         \caption{
-            \textcolor{red}{Comparison fits between the Llamaradas Estelares
+            Comparison fits between the Llamaradas Estelares
             single-peak model from \cite{tovar22} and the double-peak flare model
             from \cite{pietras22} for flares with $A \geq 0.4$. Top (A): Comparison
             in the $\chi^2$ between the best-fit model for 900 flares. A one-to-one
@@ -345,13 +345,13 @@ results of this refitting in Figure~\ref{fig:model_fit}.}
             highlight examples where the double-peak flare model has the better
             fit (B, C), the Llamaradas Estelares flare model has the better fit
             (D, E), and where the models perform equally as well (F, G). We note
-            there is no correlation between flare amplitude and preferred model.}
+            there is no correlation between flare amplitude and preferred model.
         }
         \label{fig:model_fit}
     \end{centering}
 \end{figure}
 
-\textcolor{red}{Broadly, we find the flare model from \cite{tovar22} and \cite{pietras22}
+Broadly, we find the flare model from \cite{tovar22} and \cite{pietras22}
 to fit the majority of the high-amplitude flares equally as well (Figure~\ref{fig:model_fit}\,A).
 We highlight several examples where one model fits better than the other in Figure~\ref{fig:model_fit}\,B-E,
 and cases where both profiles fit the data equally as well Figure~\ref{fig:model_fit}\,F-G.
@@ -359,7 +359,7 @@ Flares which prefer the Llamaradas Estelares model tend to have a more accuratel
 amplitude. Flares which prefer the double-peak model tend to have an extended decay timescale,
 which is better fit by the addition of a secondary flare. Flares which are fit equally well by
 both models tend to have a better fit to the amplitude in the Llamaradas Estelares model, but a
-better fit to the decay timescale in the double-peak flare model.}
+better fit to the decay timescale in the double-peak flare model.
 
 
 \subsection{Flare Quality Checks}\label{subsec2:qualitychecks}
@@ -742,10 +742,10 @@ radioisotopes in ice cores and tree rings. For a recent review, see \citet{Hatha
 
 
 While other stars should also experience activity cycles like the Sun, they are
-more difficult to measure. \textcolor{red}{Constraints on stellar cycles have
+more difficult to measure. Constraints on stellar cycles have
 predominantly relied on long baseline variations in stellar photometry, typically
 observed at cadences which cannot resolve stellar flares \citep[see recent reviews
-by ][]{jeffers23, isik23}}. However,  tracing stellar cycles via stellar flares may
+by ][]{jeffers23, isik23}. However,  tracing stellar cycles via stellar flares may
 be more reliable, as flares are a direct consequence of magnetic activity. \cite{scoggins19}
 explored measuring the stellar cycle length of KIC 8507979, a star in the \textit{Kepler}
 field which was observed for 18 90-day quarters. \cite{scoggins19} found the flare rate
@@ -759,27 +759,27 @@ a parameterization of the \textit{Kepler} flare rate \citep{lurie15}.
 Here, we explore observables from solar flares between 2002 and 2018 in the Reuven
 Ramaty High Energy Solar Spectroscopic Imager \citep[RHESSI;][]{lin02} flare
 catalog.\footnote{\url{https://hesperia.gsfc.nasa.gov/rhessi3/data-access/rhessi-data/flare-list/index.html}}
-\textcolor{red}{The RHESSI mission observes the Sun across a wide range of X-ray energies,
+The RHESSI mission observes the Sun across a wide range of X-ray energies,
 from 3 keV-17 MeV, with high temporal and energy resolutions as well as with high signal
 sensitivity. Such a wide energy range enables the ability to explore both thermal and
 non-thermal emission observed during flare events. Over 16 years of operations, over
-$100,000$ solar flares have been observed and characterized in RHESSI data.} These
+$100,000$ solar flares have been observed and characterized in RHESSI data. These
 observations covered the second half of solar Cycle 23 and the beginning of Solar
 Cycle 24. We use the publicly available RHESSI flare catalog to determine  metrics
 that would be most useful when searching for evidence of stellar cycles. One potential
 issue with this analysis is that the HXR observations from RHESSI and white-light
 observations from TESS may not be directly correlated. However, there is a close spatial
 and temporal correspondence between HXR and white-light flares on the Sun
-\citep{fletcher07, krucker11, kleint16}. \textcolor{red}{In particular, \cite{namekata17}
+\citep{fletcher07, krucker11, kleint16}. In particular, \cite{namekata17}
 demonstrated the difference spatially resolved flares as observed with RHESSI HXR and the
 Solar Dynamics Observatory (SDO)/Helioseismic and Magnetic Imager (HMI) white-light. In
 some examples, the HMI white-light emission is seen to last longer than the HXR,
-indicating the white-light emission is related to non-thermal electrons.}
+indicating the white-light emission is related to non-thermal electrons.
 
-\textcolor{red}{However, other examples of simultaneous HXR and white-light flare
+However, other examples of simultaneous HXR and white-light flare
 observations in \citep{namekata17} show similar flare durations. Therefore, we take
 the HXR solar flares with energies between $25 - 50$~keV as likely representative
-of solar white-light flares, and are a comparable sample to our TESS sample.} First,
+of solar white-light flares, and are a comparable sample to our TESS sample. First,
 the total number of flares detected in the $25 - 50$~keV bandpass varied by 650~flares
 from solar maximum in 2002 to solar minimum in 2008. This variation correlates to
 a change in flare rate from $1.81$ to $0.02$ flares day$^{-1}$ on average. Second,
@@ -936,7 +936,7 @@ that we employed rather than an exact correspondence. Nevertheless, this represe
 tentative detections of peaks in stellar activity cycles and that on average the
 length of these cycles is not an order of magnitude different than that of the Sun.
 
-\textcolor{red}{The results presented here are consistent with those presented in
+The results presented here are consistent with those presented in
 previous studies of magnetic activity cycles in young stars. \cite{olah16} analyzed
 29 stars from the Mount Wilson survey which had $\sim 36$ years of \ion{Ca}{2}
 H \& K monitoring. Roughly 16 stars in this sample have constrained ages of $< 1$~Gyr
@@ -946,9 +946,9 @@ significantly more dispersion in the young stellar cycle lengths than for the ol
 stars. \cite{olah16} concluded that young stars show more complex interannual variations
 in magnetic activity. While stars age, magnetic braking will increase the rotation
 of the star. Once this process has occurred, the magnetic activity cycle becomes more
-well-behaved, as seen on the Sun.}
+well-behaved, as seen on the Sun.
 
-\textcolor{red}{We apply the relationship between $log(1/P_\textrm{rot})$ and
+We apply the relationship between $log(1/P_\textrm{rot})$ and
 $log(P_\textrm{cyc}/P_\textrm{rot})$ described in \cite{olah16} to estimate the
 activity cycles in our sample. 10 of our 11 candidates have measured
 $P_\textrm{rot} = 0.41 - 5.22$~days. Using the best-fit slope of $0.76 \pm 0.15$,
@@ -956,7 +956,7 @@ we estimate the $P_\textrm{cyc} = 0.81 - 1.49$~years. Strong evidence of shorter
 activity cycles than $\sim 3$~years may be missed by the sparse annual sampling
 from TESS. Redesigning the next TESS extended mission to stare at the northern and
 southern ecliptic poles continuously for two years, instead of alternating poles,
-may help resolve these shorter activity cycles, if present.}
+may help resolve these shorter activity cycles, if present.
 
 
 \subsection{Validating Stellar Activity Cycles}
@@ -1082,7 +1082,7 @@ reveal what causes this feature.
             to a comparable sample with respect to age [Myr] and $T_\textrm{eff}$
             [K]. Circles represent the flare rate of the host star (name along the x-axis);
             vertical bars represent the lower 16\textsuperscript{th} and upper
-            84\textsuperscript{th} percentiles for the comparable sample. The 
+            84\textsuperscript{th} percentiles for the comparable sample. The
             majority of young planet host stars have comparable flare rates to
             the lower end of the comparison sample. A handful of hosts have more
             flares, including HIP 67522, AU Mic, DS Tuc A, and TOI 451. We find no
@@ -1149,8 +1149,8 @@ In this work, we present the first measured flare rates for stars $< 300$\,Myr u
 
 \section{acknowledgements}
 
-We thank David Wilson for thoughtful conversations. \textcolor{red}{We thank the anonymous reviewer for their insightful report,
-which improved the clarity and quality of this manuscript.} This work made use of the open-source package,
+We thank David Wilson for thoughtful conversations. We thank the anonymous reviewer for their insightful report,
+which improved the clarity and quality of this manuscript. This work made use of the open-source package,
 \textcolor{red}{\textit{showyourwork!}} \citep{luger2021}, which promotes reproducible publications. ADF acknowledges funding from
 NASA through the NASA Hubble Fellowship grant HST-HF2-51530.001-A awarded by STScI. DZS is supported by an NSF Astronomy and Astrophysics
 Postdoctoral Fellowship under award AST-2202135. This research award is partially funded by a generous gift of Charles Simonyi to the NSF
